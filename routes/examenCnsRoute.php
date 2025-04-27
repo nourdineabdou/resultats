@@ -1,0 +1,39 @@
+<?php
+Route::group(['prefix' => 'examensCON/', 'middleware' => 'roles','roles' => [1]], function () {
+    Route::get('', 'ExamenCONController@index');
+    Route::get('getDT/{profil}', 'ExamenCONController@getDT');
+    Route::get('get/{id}','ExamenCONController@get');
+    Route::get('getTab/{id}/{tab}','ExamenCONController@getTab');
+    Route::get('add','ExamenCONController@formAdd');
+    Route::post('add','ExamenCONController@add');
+    Route::post('saisirnote','ExamenCONController@saisirnote');
+    Route::post('saisirnote3','ExamenCONController@saisirnote3');
+    Route::post('edit','ExamenCONController@edit');
+    Route::get('delete/{id}','ExamenCONController@delete');
+    Route::get('getmatiers_profil/{profil}/{etape}','ExamenCONController@getmatiers_profil');
+    Route::get('getNotes/{matiere}','ExamenCONController@getNotes');
+    Route::get('getNotesCorr3/{matiere}','ExamenCONController@getNotesCorr3');
+    Route::get('optionTroisiemeConcours/{matiere}','ExamenCONController@optionTroisiemeConcours');
+    Route::get('getCandidatsSalle/{matiere}/{pacquet}/{correction}','ExamenCONController@getCandidatsSalle');
+    Route::get('getCandidatCorr3/{matiere}/{pacquet}/{correction}','ExamenCONController@getCandidatCorr3');
+    Route::get('genererAnonymats','ExamenCONController@genererAnonymats');
+    Route::get('generer3correction/{matiere}','ExamenCONController@generer3correction');
+    Route::get('calculer3correction','ExamenCONController@calculer3correction');
+    Route::get('calculerNoteEtud','ExamenCONController@calculerNoteEtud');
+    Route::get('imprimerCollectNoteCand','ExamenCONController@imprimerCollectNoteCand');
+    Route::get('imprimerCollectNoteCandFinal','ExamenCONController@imprimerCollectNoteCandFinal');
+   Route::get('imprimerCollectNoteCandFinalAdmis','ExamenCONController@imprimerCollectNoteCandFinalAdmis');
+    Route::get('genererSalles','ExamenCONController@genererSalles');
+    Route::get('imprimerListeEmergemet/{profil}/{groupe}/{semestre}/{etape}/{choix}','ExamenCONController@imprimerListeEmergemet');
+    Route::get('imprimerCollectNote/{profil}/{groupe}/{semestre}/{etape}/{choix}','ExamenCONController@imprimerCollectNote');
+    Route::get('imprimerListeEmargementParSalle/{matiere}','ExamenCONController@imprimerListeEmargementParSalle');
+    Route::get('imprimerListeEmargementParSalle1/{matiere}','ExamenCONController@imprimerListeEmargementParSalle1');
+    Route::get('imprimerListeEmargementTroisiemeCorrection/{matiere}','ExamenCONController@imprimerListeEmargementTroisiemeCorrection');
+    Route::get('imprimerCollectNoteParSalle/{matiere}','ExamenCONController@imprimerCollectNoteParSalle');
+    Route::get('getImprimerAnnymatParDosier/{matiere}','ExamenCONController@getImprimerAnnymatParDosier');
+    Route::get('getImpression','ExamenCONController@getImpression');
+    Route::get('getImpressionCollect','ExamenCONController@getImpressionCollect');
+   Route::get('giveEtudiantId','ExamenCONController@giveEtudiantId');
+    Route::get('getImpressionCorrespond','ExamenCONController@getImpressionCorrespond');
+});
+?>

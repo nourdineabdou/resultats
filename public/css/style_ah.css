@@ -1,0 +1,86 @@
+.dgct-icon {
+  font-size: 5rem;
+  transition: all .2s ease-in-out;
+}
+.dgct-title span {
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: 1rem;
+    display:inline-block;
+}
+.dgct-title {
+    /* min-height: 125px; */
+}
+#dgctMenu .card:hover .dgct-icon {
+  transform: scale(1.2);
+}
+#dgctMenu .bg-primary:hover{
+  background-color: #365bc5!important;
+}
+#dgctMenu .bg-light:hover{
+  background-color: #ffffff!important;
+}
+#dgctMenu .bg-success:hover{
+  background-color: #139e6c!important;
+}
+#dgctMenu .bg-warning:hover{
+  background-color: #daaa2f!important;
+}
+#dgctMenu .bg-info:hover{
+  background-color: #2198a9!important;
+}
+#dgctMenu .bg-dark:hover{
+  background-color: #2b2b31!important;
+}
+#dgctMenu .bg-danger:hover{
+  background-color: #bd372a!important;
+}
+#dgctMenu .bg-violet:hover{
+  background-color: #98278a!important;
+}
+#dgctMenu .bg-chocolat:hover{
+  background-color: #984522!important;
+}
+#dgctMenu .bg-orange:hover{
+  background-color: #ad8113!important;
+}
+#dgctMenu .bg-admin:hover{
+  background-color: #324371!important;
+}
+.dgct-title img {
+    height: 60px;
+}
+.bg-violet {
+    background-color: #b342a5!important;
+}
+.bg-chocolat {
+    background-color: #da6837!important;
+}
+.bg-orange {
+    background-color: #dea71b!important;
+}
+.bg-admin {
+    background-color: #4f639c!important;
+}
+.border-dash {
+    border: .3rem solid #ffffff!important;
+}
+.card-badge {
+    position: absolute;
+    bottom: 2px;
+    right: 0;
+    background-color: rgba(255,255,255,.8);
+    overflow: hidden;
+    padding: 0 5px;
+    border: 1px solid #da6837;
+    border-top: 0;
+    border-right: 0;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    color: #666;
+    font-size: 0.9rem;
+}
+.table-responsive {
+    overflow-x: hidden;
+}
