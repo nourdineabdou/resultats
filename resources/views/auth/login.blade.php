@@ -41,6 +41,11 @@
                     </div>
                   </form>
                   </form>
+                  <div class="text-center mt-3">
+                    <a href="{{ asset('doctorat.pdf') }}" class="btn btn-success btn-user btn-block" download target="_blank" style="padding: .75rem 1.25rem; font-weight:600;">
+                      📥 Formulaire d’inscription au doctorat — استمارة التسجيل في الدكتوراه (PDF)
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
