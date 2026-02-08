@@ -481,114 +481,7 @@ class editionController extends Controller
         $etudiant = Etudiant::find($id);
         $etds =EtudMat::where('annee_id',$annee->id)->where('etudiant_id',$id)->get()->first();
         $profil= $etds->profil_id;
-       /* $etdsss= EtudMat::where('profil_id',75)->where('matiere_id',1031)->where('annee_id',4)->orderBy('ref_semestre_id')->get();
-        foreach ($etdsss as $etdsmm)
-        {
-           // dd($etdsmm);
 
-            $verif1m =EtudMat::where('annee_id',4)->where('etudiant_id',$etdsmm->etudiant_id)->where('matiere_id',1557)->get();
-            if ($verif1m->count()>0 ){
-              // dd('ren');
-            }
-
-            else{
-              //  dd('new');
-                $matiere=Matiere::find(1557);
-
-               // dd($matiere);
-                $etd_mat = new EtudMat();
-                $etd_mat->etudiant_id = $etdsmm->etudiant_id;
-                $etd_mat->profil_id = 75;
-                $etd_mat->NODOS = $etdsmm->NODOS;
-                $etd_mat->Code = $matiere->modulle_id;
-                $etd_mat->NOMAT = $matiere->code;
-                $etd_mat->matiere_id = $matiere->id;
-                $etd_mat->ref_semestre_id = $matiere->ref_semestre_id;
-                $etd_mat->annee_id = 4;
-                $etd_mat->save();
-            }
-        }*/
-		//icici nnnnn
-		/*
-        if ($profil == 74 and $annee->id=3)
-        {
-
-            $etdsss= EtudMat::where('profil_id',74)->where('matiere_id',1553)->where('annee_id',3)->orderBy('ref_semestre_id')->get();
-            foreach ($etdsss as $etdsmm)
-            {
-            $verif1m =EtudMat::where('annee_id',3)->where('etudiant_id',$etdsmm->etudiant_id)->where('matiere_id',1555)->get();
-            if ($verif1m->count()>0 ){
-            }
-            else{
-                $matiere=Matiere::find(1555);
-                $etd_mat = new EtudMat();
-                $etd_mat->etudiant_id = $etdsmm->etudiant_id;
-                $etd_mat->profil_id = 74;
-                $etd_mat->NODOS = $etdsmm->NODOS;
-                $etd_mat->Code = $matiere->modulle_id;
-                $etd_mat->NOMAT = $matiere->code;
-                $etd_mat->matiere_id = $matiere->id;
-                $etd_mat->ref_semestre_id = $matiere->ref_semestre_id;
-                $etd_mat->annee_id = 3;
-                $etd_mat->save();
-            }
-            /*$verif2m =EtudMat::where('annee_id',3)->where('etudiant_id',$etdsmm->etudiant_id)->where('matiere_id',1554)->get();
-            if ($verif2m->count()>0 ){
-            }
-            else{
-                $matiere=Matiere::find(1554);
-                $etd_mat = new EtudMat();
-                $etd_mat->etudiant_id = $etdsmm->etudiant_id;
-                $etd_mat->profil_id = 74;
-                $etd_mat->NODOS = $etdsmm->NODOS;
-                $etd_mat->Code = $matiere->modulle_id;
-                $etd_mat->NOMAT = $matiere->code;
-                $etd_mat->matiere_id = $matiere->id;
-                $etd_mat->ref_semestre_id = $matiere->ref_semestre_id;
-                $etd_mat->annee_id = 3;
-                $etd_mat->save();
-            }
-            }
-        }*/
-		//jusqau ici
-        $niveauEtude=Profil::find($profil);
-        if ($niveauEtude->ref_niveau_etude_id == 1)
-        {
-            $credits=0;
-            $matieres = Matiere::where('profil_id', $profil)->whereIn('ref_semestre_id',[1,2])->get();
-            foreach ($matieres as $matiere) {
-               $MtMat  = EtudMat::where('etudiant_id',$id)->where('matiere_id',$matiere->id)->where('annee_id',$annee->id)->orderBy('ref_semestre_id')->get();
-            if ( $MtMat->count()>0){
-
-            }
-            else{
-
-                if ($etudiant->NODOS > 'L24264') {
-
-                    $etd_mat = new EtudMat();
-                    $etd_mat->etudiant_id = $id;
-                    $etd_mat->profil_id = $profil;
-                    $etd_mat->NODOS = $etudiant->NODOS;
-                    $etd_mat->Code = $matiere->modulle_id;
-                    $etd_mat->NOMAT = $matiere->code;
-                    $etd_mat->matiere_id = $matiere->id;
-                    $etd_mat->ref_semestre_id = $matiere->ref_semestre_id;
-                    $etd_mat->annee_id = $this->annee_id();
-                    $etd_mat->save();
-                }
-            }
-
-            }
-            /*foreach ($etudiantMat as $etudMat)
-            {
-               $matiere= App\Models\Matiere::find($etudMat->matiere_id);
-               $credits +=$matiere->credit;
-            }
-            if ($credits<57)
-            {
-
-            }*/
-        }
         $etudiantMat = EtudMat::where('etudiant_id',$id)->where('annee_id',$annee->id)->orderBy('ref_semestre_id')->get();
         $exm = new ExamenCONController();
         $titre=trans("text_me.attestation");
@@ -1210,7 +1103,7 @@ $cp +=1;
         $html='';
         $html .='<table style="width: 100%;" border="1">
                     <tr>
-                    
+
                      <td align="center">لغة التكوين</td>
                      <td align="center">الجنسية</td>
                      <td align="center">ذا كان  الجواب نعم حدد   المؤسسة  القادم منها</td>
@@ -1333,7 +1226,7 @@ $cp +=1;
                          <td style="" align="right">الحميع</td>
                           <td style="" align="right">الجدد</td>
                             <td style="" align="right">الاناث</td>
-                           
+
                             <td style="" align="right">الذكور</td>
                         </tr>
                          <tr>
