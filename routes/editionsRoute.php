@@ -1,5 +1,5 @@
 <?php
-Route::group(['prefix' => 'editions/', 'middleware' => 'roles','roles' => [1,4,5,11,7]], function () {
+Route::group(['prefix' => 'editions/'], function () {
     Route::get('', 'editionController@index');
     Route::get('getDT/{profil}/{groupe}', 'editionController@getDT');
     Route::get('getDT/{profil}/{groupe}/{id}', 'editionController@getDT');

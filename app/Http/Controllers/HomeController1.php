@@ -26,9 +26,6 @@ class HomeController extends Controller
         $test1 =EtudMat::where('annee_id',$annee->id)->where('etudiant_id',$etudiant->id)->orderBy('ref_semestre_id')->get();
         $html='<div class="col-md-12 text-center form-group " align="center">'.$etudiant->NODOS.' <br>'.$etudiant->NOMF.' / '.$etudiant->NOMA.'</div>';
         if ($test1->count()>0){
-			    //  $html .='<div class="col-md-12 text-center form-group " align="center"><button type="button" class="btn btn-sm btn-success mb-3 btn-block" onClick="exporteattestationPDF('.$etudiant->id.')"  title="'.trans('text_me.exporter').'"><i class=" fa fa-file-pdf">'.trans('text_me.exporter').'</i></button></div>';
-                  $html .='<div class="col-md-12 text-center form-group " align="center"><button type="button" class="btn btn-sm btn-success mb-3 btn-block" onclick="exporteattestationPDF('.$etudiant->id.')"  ><i class="fa fa-file-pdf"> '.trans('text_me.exporter').' </i></button></div>';
-                
             $semestres=RefSemestre::where('etat',1)->get();
             foreach ($semestres as $semestre)
             {
@@ -49,9 +46,9 @@ class HomeController extends Controller
           return redirect('login');
       }
     }
-public function sorties($html)
+public function sorties()
     {
-        return view('logout',['html'=>$html]);
+        return view('logout');
     }
 
     public function selectModule($module_id)
@@ -72,11 +69,10 @@ public function sorties($html)
             return $this->dashboard($request->nodos);
         }
         else {
-            if (Etudiant::where(['NNI'=>$request->nni])->exists())
-                return $this->sorties('رقم التسجيل غير صحيح');
-            else if (Etudiant::where( ['NODOS'=>$request->nodos])->exists())
-                return $this->sorties('الرقم الوطني  غير صحيح');
-            else return $this->sorties('البيانات غير الصحيحة');
+            if (Etudiant::where(['NNI'=>$request->nni, 'NODOS'=>$request->nodos])->exists())
+                return $this->sorties();
+            else
+                return $this->sorties();
         }
     }
 }

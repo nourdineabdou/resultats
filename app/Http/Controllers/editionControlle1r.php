@@ -28,62 +28,11 @@ class editionController extends Controller
 
     public function __construct()
     {
-      //  $this->middleware('auth');
+        $this->middleware('auth');
     }
 
     public function index()
     {
-        $annee=Annee::where('etat',1)->get()->first();
-        $etudiants=Etudiant::where('DIPL',454545455454454545454545)->get();
-/*$anonyms=App\Models\Anonymatsconcour::all();
-foreach ($anonyms as $anony){
-    $bureau=App\Models\Bureau::where('libelle',trim($anony->anonymat))->get();
-    if ($bureau->count()>0){
-       // dd($bureau);
-    }
-}*/
-      foreach ($etudiants as $etudiant){
-           $etds =EtudMat::where('annee_id',7)->where('etudiant_id',$etudiant->id)->orderBy('ref_semestre_id','DESC')->get();
-          if ($etds->count()>0){
-              $id_profil=$etds->first()->profil_id;
-              if ($id_profil==$etudiant->profil_id){
-
-              }
-              else{
-                  $eleve=Etudiant::find($etudiant->id);
-                  $eleve->profil_id=$id_profil;
-                  $eleve->save();
-                  echo '<br>'.$eleve->NODOS;
-              }
-          }
-
-            /*if ($etds->count()>0){
-               $bureau=App\Models\Bureau::where('libelle','LIKE','%'.$etudiant->NODOS.'%')->get();
-               //where('name','LIKE',"%{$search}%")
-                if ($bureau->count()>0){}
-                else{
-                    $profi999='';
-                    $profi=Profil::find($etds->first()->profil_id);
-                    if ($profi){
-                        $profi999=$profi->libelle;
-                    }
-                    $vero=App\Models\Anonymatsconcour::where('anonymat',$etudiant->NODOS)->get();
-                    if ($vero->count()>0){
-
-                    }
-                    else{
-                    $anano=new App\Models\Anonymatsconcour();
-                    $anano->anonymat = $etudiant->NODOS;
-                    $anano->pacquet = $etudiant->NOMA;
-                    $anano->semestre = $etds->first()->ref_semestre_id;
-                    $anano->nni = $etudiant->NNI;
-                    $anano->profil = $profi999;
-                    $anano->save();
-                    }
-                }
-           }*/
-       }
-
         $profils = Profil::all();
         $groupes =App\Models\RefGroupe::all();
         return view($this->module.'.index',['profils'=>$profils,'groupes'=>$groupes]);
@@ -92,8 +41,7 @@ foreach ($anonyms as $anony){
     public function getDT($profil='all',$groupe='1',$selected='all')
     {
 	    $annee=Annee::where('etat',1)->get()->first();
-		 // $annee=Annee::where('etat',454545)->get()->first();
-		$etds =App\Models\EtudSemestre::where('annee_id',$annee->id)->get();
+		$etds =EtudMat::where('annee_id',$annee->id)->get();
 		$et='';
         global $fils;
 
@@ -114,7 +62,7 @@ foreach ($anonyms as $anony){
             $etudiants = $etudiants->orderByRaw('id = ? desc', [$selected]);
         if ($profil != 'all')
         {
-            $etds =App\Models\EtudSemestre::where('annee_id',$annee->id)->where('profil_id',$profil)->get();
+            $etds =EtudMat::where('annee_id',$annee->id)->where('profil_id',$profil)->get();
             $et='';
             $fils=array();
             foreach($etds as $etd)
@@ -125,19 +73,19 @@ foreach ($anonyms as $anony){
                     if($et !=$etd->etudiant_id)
                     {
                          if ($niveau == 1){
-                            $test1 =App\Models\EtudSemestre::where('annee_id',$annee->id)->where('etudiant_id',$etd->etudiant_id)
-                                ->where('ref_semestre_id',3)->get();
+                            $test1 =EtudMat::where('annee_id',$annee->id)->where('etudiant_id',$etd->etudiant_id)
+                                ->where('ref_semestre_id',3)->orderBy('ref_groupe_id')->get();
                             if ($test1->count()>0){}else{  $fils[]=$etd->etudiant_id; }
                         }
                         else if ($niveau == 2){
-                            $test1 =App\Models\EtudSemestre::where('annee_id',$annee->id)->where('etudiant_id',$etd->etudiant_id)
-                                ->where('ref_semestre_id',5)->get();
+                            $test1 =EtudMat::where('annee_id',$annee->id)->where('etudiant_id',$etd->etudiant_id)
+                                ->where('ref_semestre_id',5)->orderBy('ref_groupe_id')->get();
                             if ($test1->count()>0){}else{  $fils[]=$etd->etudiant_id; }
                         }
 
                         else if ($niveau == 4){
-                            $test1 =App\Models\EtudSemestre::where('annee_id',$annee->id)->where('etudiant_id',$etd->etudiant_id)
-                                ->where('ref_semestre_id',3)->get();
+                            $test1 =EtudMat::where('annee_id',$annee->id)->where('etudiant_id',$etd->etudiant_id)
+                                ->where('ref_semestre_id',3)->orderBy('ref_groupe_id')->get();
                             if ($test1->count()>0){}else{  $fils[]=$etd->etudiant_id; }
                         }
                         else {
@@ -157,7 +105,7 @@ foreach ($anonyms as $anony){
         if ($groupe != 'all')
         {
 
-            $etds =App\Models\EtudSemestre::where('annee_id',$annee->id)->where('ref_groupe_id',$groupe)->where('profil_id',$profil)->get();
+            $etds =EtudMat::where('annee_id',$annee->id)->where('ref_groupe_id',$groupe)->where('profil_id',$profil)->get();
             $et='';
             $fils=array();
             foreach($etds as $etd)
@@ -176,7 +124,6 @@ foreach ($anonyms as $anony){
         return DataTables::of($etudiants)
             ->addColumn('actions', function(Etudiant $etudiants) {
                 $html = '<div class="btn-group">';
-                if ($etudiants->DIPL==1){
               /*  if (Auth::user()->hasAccess(1) or Auth::user()->hasAccess(4,3) or Auth::user()->hasAccess(5,3))
                 {*/
                     $html .=' <button type="button" class="btn btn-sm btn-dark" onClick="openObjectModal('.$etudiants->id.',\''.$this->module.'\')" data-toggle="tooltip" data-placement="top" title="'.trans('text.visualiser').'"><i class="fa fa-fw fa-eye"></i></button> ';
@@ -208,16 +155,7 @@ foreach ($anonyms as $anony){
                     $html .= ' <button type="button" class="btn btn-sm btn-warning" onClick="chanerNumero('.$etudiants->id.')" data-toggle="tooltip" data-placement="top" title="' . trans('text_me.changerNum') . '"><i class="fas fa-sort-numeric-down-alt"></i></button> ';
                 if (Auth::user()->hasAccess([1], 5))
                     $html .= ' <button type="button" class="btn btn-sm btn-infos" onClick="chagerProfil1('.$etudiants->id.')" data-toggle="tooltip" data-placement="top" title="' . trans('text_me.modifierProfil1') . '"><i class="fas fa-edit"></i></button> ';
-                }
-                else{
-                    $html .='التسجيل موقف في انتظار الامضاء عليه';
-                    if (Auth::user()->id==33 OR Auth::user()->id==20){
-                        $html .='<button type="button" class="btn btn-sm btn-success" onClick="exporteattestationPDF('.$etudiants->id.')" data-toggle="tooltip" data-placement="top" title="'.trans('text_me.exporter').'"><i class="fas fa-fw fa-file-pdf"></i></button>';
-                        $html .=' <button type="button" class="btn btn-sm btn-dark" onClick="openObjectModal('.$etudiants->id.',\''.$this->module.'\')" data-toggle="tooltip" data-placement="top" title="'.trans('text.visualiser').'"><i class="fa fa-fw fa-eye"></i></button> ';
 
-                    }
-
-                }
                 $html .='</div>';
                 return $html;
             })
@@ -540,47 +478,9 @@ foreach ($anonyms as $anony){
     public function exporteattestationPDF($id)
     {
         $annee=Annee::where('etat',1)->get()->first();
-        $annePasse=Annee::where('etat',2)->get()->first()->id;
-        $etudiantr = Etudiant::find($id);
-        $etudiantr->DIPL=1;
-        $etudiantr->save();
         $etudiant = Etudiant::find($id);
         $etds =EtudMat::where('annee_id',$annee->id)->where('etudiant_id',$id)->get()->first();
         $profil= $etds->profil_id;
-		
-		 $maitierRest = App\Models\RelevesNote::where('etudiant_id', $id)
-                            ->where('annee_id', $annePasse)->where('decision', 0)->orderBy('ref_semestre_id')->get();
-                        if ($maitierRest->count() > 0) {
-							foreach($maitierRest as $maitief){
-						$MtMatv  = EtudMat::where('etudiant_id',$id)->where('matiere_id',$maitief->matiere_id)->where('annee_id',$annee->id)->orderBy('ref_semestre_id')->get();
-								if($MtMatv ->count()>0){}
-								else{		
-						
-													$matiere1=Matiere::find($maitief->matiere_id);
-													$etd_mat = new EtudMat();
-													$etd_mat->etudiant_id = $id;
-													$etd_mat->profil_id = $profil;
-													$etd_mat->NODOS = $etudiant->NODOS;
-													$etd_mat->Code = $matiere1->modulle_id;
-													$etd_mat->NOMAT = $matiere1->code;
-													$etd_mat->matiere_id = $matiere1->id;
-													$etd_mat->ref_semestre_id = $matiere1->ref_semestre_id;
-													$etd_mat->annee_id = $this->annee_id();
-													$etd_mat->save();
-								}
-						}
-						}
-						
-								
-								
-								
-								
-								
-								
-								
-								
-								
-								
        /* $etdsss= EtudMat::where('profil_id',75)->where('matiere_id',1031)->where('annee_id',4)->orderBy('ref_semestre_id')->get();
         foreach ($etdsss as $etdsmm)
         {
@@ -659,24 +559,11 @@ foreach ($anonyms as $anony){
             foreach ($matieres as $matiere) {
                $MtMat  = EtudMat::where('etudiant_id',$id)->where('matiere_id',$matiere->id)->where('annee_id',$annee->id)->orderBy('ref_semestre_id')->get();
             if ( $MtMat->count()>0){
-                $releves = App\Models\RelevesNote::where('matiere_id',$matiere->id)->where('annee_id','<>',$annee->id)->where('etudiant_id',$id)->get();
-                if($releves->count()>0){
-                   foreach ($releves as $releve)
-                   {
-                       if ($releve->decision == 1 or $releve->decision == 11) {
-                           foreach ($MtMat as $MtM)
-                           {
-                               $ms=EtudMat::find($MtM->id);
-							   if($ms)
-                               $ms->delete();
-                           }
-                       }
-                   }
-                }
+
             }
             else{
 
-                if ($etudiant->NODOS > '29219') {
+                if ($etudiant->NODOS > 'L24264') {
 
                     $etd_mat = new EtudMat();
                     $etd_mat->etudiant_id = $id;
@@ -688,21 +575,6 @@ foreach ($anonyms as $anony){
                     $etd_mat->ref_semestre_id = $matiere->ref_semestre_id;
                     $etd_mat->annee_id = $this->annee_id();
                     $etd_mat->save();
-					if ( $MtMat->count()>0){
-                $releves = App\Models\RelevesNote::where('matiere_id',$matiere->id)->where('annee_id','<>',$annee->id)->where('etudiant_id',$id)->get();
-                if($releves->count()>0){
-                   foreach ($releves as $releve)
-                   {
-                       if ($releve->decision == 1 or $releve->decision == 11) {
-                           foreach ($MtMat as $MtM)
-                           {
-                               $ms=EtudMat::find($MtM->id);
-                               $ms->delete();
-                           }
-                       }
-                   }
-                }
-            }
                 }
             }
 
@@ -717,9 +589,7 @@ foreach ($anonyms as $anony){
 
             }*/
         }
-
         $etudiantMat = EtudMat::where('etudiant_id',$id)->where('annee_id',$annee->id)->orderBy('ref_semestre_id')->get();
-
         $exm = new ExamenCONController();
         $titre=trans("text_me.attestation");
         $html = $exm->entete($titre.'<br>'.$annee->libelle.'','P',false,$etudiant);
@@ -753,7 +623,7 @@ foreach ($anonyms as $anony){
 
             }
             else{
-                if ($etudiant->NODOS > 'L26473') {
+                if ($etudiant->NODOS > 'L22089') {
                     //dd('h');
                     $etd_mat = new EtudMat();
                     $etd_mat->etudiant_id = $id;
@@ -793,7 +663,7 @@ foreach ($anonyms as $anony){
         $id = Annee::where('etat', 1)->get()->first()->id;
         return $id;
     }
-    public  function infosEtudiant($etudiant,$profil1='',$anne='')
+    public  function infosEtudiant($etudiant,$profil1='')
     {
         $html ='<table style="width: 100%" border="">
             <tr>
@@ -856,10 +726,7 @@ foreach ($anonyms as $anony){
                         <td align="right" style="width: 70%">'.$etudiant->LIEUNA.'</td>
                         <td align="right" style="width: 30%">'.trans("text_me.lieuN").':</td>
                     </tr>';
-        $annee=Annee::where('etat',1)->get()->first();
-						if ($anne==''){ $annee=Annee::where('etat',1)->get()->first();}
-						else{ $annee=Annee::find($anne);}
-
+                    $annee=Annee::where('etat',1)->get()->first();
                     if ($profil1=='')
                     {
                         $profil1 = EtudMat::where('etudiant_id',$etudiant->id)->where('annee_id',$annee->id)->orderBy('ref_semestre_id','DESC')->get()->first()->profil_id;
@@ -878,7 +745,6 @@ foreach ($anonyms as $anony){
         return $html;
     }
     public function infosInscription($etudiantMat,$groupe='ا'){
-        $annee=Annee::where('etat',1)->get()->first();
         $ip=0;
         if ($etudiantMat->count()>0){
           $t=$etudiantMat->first()->profil_id;
@@ -897,27 +763,9 @@ foreach ($anonyms as $anony){
            $html .=' <td align="center" style="width: 10%"><b>السداسي</b></td>';
        }
         $html .=' </tr>';
-$idverifexiste=0;$cptmt=0;
         foreach ($etudiantMat as $mat) {
-            //dd($mat->matiere_id);
-			//$cptmt=0;
-			$idverifexiste=0;
-            $releves = App\Models\RelevesNote::where('matiere_id',$mat->matiere_id)->where('annee_id','<>',$annee->id)->where('etudiant_id',$mat->etudiant_id)->get();
-            if($releves->count()>0){
-               // dd($mat->matiere_id);
-                foreach ($releves as $releve)
-                {
-                    if ($releve->decision == 1 or $releve->decision == 11) {
-                            $ms=EtudMat::find($mat->id);
-							if($ms)
-                            $ms->delete(); $idverifexiste=$mat->id;
-
-                    }
-                }
-            }
-            if (isset($mat->matiere->modulle->libelle) and $idverifexiste !=$mat->id )
+            if (isset($mat->matiere->modulle->libelle))
             {
-				$cptmt +=1;
                 $html .= '
            <tr>
                 <td align="center">' . $mat->matiere->modulle->libelle . '</td>
@@ -930,10 +778,8 @@ $idverifexiste=0;$cptmt=0;
         }
 
         $html .='</table>';
-        $html .='<table><tr><td align="right"><b>عدد العناصر :'.$cptmt.'</b></td></tr></table>';
-        $html .='<br><br><br><br><table><tr><td align="left"><b>رئيس مصلحة الشؤون الطلابية</b></td></tr>';
-		$html .='<tr><td align="left"><img src="img/signatureseedt.PNG" alt="" width="200" height="100"/></td></tr>';
-		$html .='</table>';
+        $html .='<table><tr><td align="right"><b>عدد العناصر :'.count($etudiantMat).'</b></td></tr></table>';
+        $html .='<br><br><br><br><table><tr><td align="left"><b>رئيس مصلحة الشؤون الطلابية</b></td></tr></table>';
         return $html;
     }
 
@@ -950,6 +796,8 @@ $idverifexiste=0;$cptmt=0;
         {
             $etds =EtudMat::where('annee_id',$annee->id)->where('profil_id',$profil->id)->orderBy('NODOS')->get();
             $et='';
+
+
            $etudiants='';
 			$html .=$this->etudiantProfil($profil->id,$etudiants);
 
@@ -994,21 +842,18 @@ $idverifexiste=0;$cptmt=0;
     public function pdfListeRenvoyer()
     {
         $annee=Annee::where('etat',1)->get()->first();
-        $etudiants = Etudiant::where('profil_id',66)->get();
+        $etudiants = Etudiant::all();
         $html ='';
         $exm = new ExamenCONController();
         $titre='لوائح المطرودين';
         $html = $exm->entete($titre.' <br>'.$annee->libelle);
         $html .='<table style="width: 100%" border="1">
                 <tr>
-                    <th align="right" style="width: 15%">الملاحظة</th>
-                    <th align="right" style="width: 25%">التخصص </th>
-                    <th align="right" style="width: 30%">الاسم</th>
-                    <th align="right" style="width: 12%">ر.و</th>
-                    <th align="right" style="width: 8%">باك</th>
+                    <th align="right" style="width: 20%">الملاحظة</th>
+                    <th align="right" style="width: 35%">التخصص </th>
+                    <th align="right" style="width: 35%">الاسم</th>
                     <th align="right" style="width: 10%">رقم التسجيل</th>
                 </tr>';
-				
         foreach ($etudiants as $etudiant)
         {
                  $etdSUPs =EtudMat::where('annee_id',$annee->id)
@@ -1098,11 +943,9 @@ $idverifexiste=0;$cptmt=0;
                }
                $html .='
                 <tr>
-                    <td align="right" style="width: 15%">مطرود</td>
-                    <td align="right" style="width: 25%">'.$profil.' </td>
-                    <td align="right" style="width: 30%">'.$etudiants->NOMA.'</td>
-                    <td align="right" style="width: 12%">'.$etudiants->NNI.'</td>
-                    <td align="right" style="width: 8%">'.$etudiants->NOBAC.'</td>
+                    <td align="right" style="width: 20%">مطرود</td>
+                    <td align="right" style="width: 35%">'.$profil.' </td>
+                    <td align="right" style="width: 35%">'.$etudiants->NOMA.'</td>
                     <td align="right" style="width: 10%">'.$etudiants->NODOS.'</td>
                 </tr>';
            }
@@ -1199,12 +1042,10 @@ $cp +=1;
     public function pdfattestationColl($profil,$groupe)
     {
        // dd($groupe);
-       $libG=App\Models\RefGroupe::find($groupe)->libelle;
+       //$libG=App\Models\RefGroupe::find($groupe)->libelle;
         $html ='';
        // whereIn('id',EtudiantInscrit::where('ref_annee_id',$anne->id)->where('classe_id',$classe)->pluck('etudiant_id'))
-        //$etudiants = Etudiant::whereIn('id',App\Models\TmpAttesationColl::where('etudiant_id','<>','')->pluck('etudiant_id'))->get();
-        $etudiants =  Etudiant::where('DECF','1')->where('DIPL','1')->where('profil_id',$profil)->where('groupe',$libG)
-                      ->get();
+        $etudiants = Etudiant::whereIn('id',App\Models\TmpAttesationColl::where('etudiant_id','<>','')->pluck('etudiant_id'))->get();
         //dd($etudiants);
         foreach ($etudiants as $etudiant)
         {
@@ -1274,7 +1115,7 @@ $cp +=1;
 
 
             $groupeli=$grou->libelle;
-            $etudiants = Etudiant::where('DECF','1')->where('DIPL','1')->whereIn('id',$fils)->where('groupe',$groupeli)
+            $etudiants = Etudiant::where('DECF','1')->whereIn('id',$fils)->where('groupe',$groupeli)
                 ->orderByRaw('LENGTH(NODOS)', 'ASC')
                 ->orderBy('NODOS', 'ASC')
                 ->get();
@@ -1342,7 +1183,7 @@ $cp +=1;
 
 
             $groupeli=$grou->libelle;
-            $etudiants = Etudiant::where('DECF','1')->where('DIPL','1')->whereIn('id',$fils)->where('groupe',$groupeli)
+            $etudiants = Etudiant::where('DECF','1')->whereIn('id',$fils)->where('groupe',$groupeli)
                 ->orderByRaw('LENGTH(NODOS)', 'ASC')
                 ->orderBy('NODOS', 'ASC')
                 ->get();

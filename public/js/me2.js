@@ -110,20 +110,13 @@ function getBultinImpressionCollect() {
     return true;
 }
 
-function getbultin(id,semestre) {
-
-    document.formst1.action = 'examens/getbultin/'+id+'/'+semestre;
-    document.formst1.target = "_blank";    // Open in a new window
-    document.formst1.submit();             // Submit the page
-    return true;
-}
-
 function getBultinImpressionIndiRel() {
     var nodos = $('#nodos').val();
+   var typer = $('#typer').val();
     var semestre = $('#semestrein').val();
     var annee_id = $('#annee_id').val();
     if (nodos !='' && semestre!='' && annee_id!='')
-    document.formst1.action = 'examens/getBultinImpressionIndiRel/'+nodos+'/'+semestre+'/'+annee_id+'';
+    document.formst1.action = 'examens/getBultinImpressionIndiRel/'+nodos+'/'+semestre+'/'+annee_id+'/'+typer;
     document.formst1.target = "_blank";    // Open in a new window
     document.formst1.submit();             // Submit the page
     return true;
@@ -1721,9 +1714,9 @@ function test(value,noteEssay) {
 }
 
 function exporteattestationPDF(id){
-    document.formst1.action = 'editions/exporteattestationPDF/'+id+'';
-    document.formst1.target = "_blank";    // Open in a new window
-    document.formst1.submit();             // Submit the page
+    document.formst.action = 'editions/exporteattestationPDF/'+id+'';
+    document.formst.target = "_blank";    // Open in a new window
+    document.formst.submit();             // Submit the page
     return true;
 }
 
@@ -1751,8 +1744,8 @@ function pdfListeRenvoyer(){
 
 function pdfattestationColl(){
     profil = $("#profil").val();
-     //groupe = $("#groupe").val();
-    groupe='ا';
+    groupe = $("#groupe").val();
+   // groupe='ا';
     document.formst3.action = 'editions/pdfattestationColl/'+profil+'/'+groupe;
     document.formst3.target = "_blank";    // Open in a new window
     document.formst3.submit();             // Submit the page
