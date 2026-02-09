@@ -1,0 +1,172 @@
+mberOfOfferItems:r=3,numberOfFooterItems:s=2,offerExpiryCutOffInSeconds:n}=this.wcInstance.config;this.wcInstance.targetTopsSitesRect=o,this.wcInstance.hoverFlyoutOpen=!0;const a=this.wcInstance.telemetryObject;this.wcInstance.footer=null===(t=this.footer)||void 0===t?void 0:t.slice(0,s).map((e,t)=>(e.telemetryTag=a.addOrUpdateChild({name:`${C}-${t+1}`,behavior:M.c.Navigate}).getMetadataTag(),e.index=t,e.ariaHelpText=this.wcInstance.strings.ariaLabelFooterLink,e)),this.wcInstance.offers=null===(i=this.offers)||void 0===i?void 0:i.filter(e=>{const t=Date.now()+1e3*n;return!(e.expiryUnixTime&&e.expiryUnixTime<=t)}).slice(0,r).map((e,t)=>(e.telemetryTag=a.addOrUpdateChild({name:`${T}-${t+1}`,behavior:M.c.Navigate}).getMetadataTag(),e.isOfferExpired=!e.annotation&&e.timeLeftForExpiry&&e.timeLeftForExpiry<=0,e.index=t,e.offerExpiryText=this.wcInstance.strings.offerExpiryText,e.ariaHelpText=this.wcInstance.strings.ariaLabelOfferItem,e))},this.unmountShouldFire=()=>{this.wcInstance.hoverFlyoutOpen=!1},this.focusShouldMove=e=>e,this.wcInstance=e}updateData(e){const{enableBadgeNotifications:t}=this.wcInstance.config;if(e){const i=y.a.getInstance().rootReducer.connector(O.a.SmartListSharedData),r={};return this.footer=e.footer,this.offers=e.offers,t&&i&&(r.children=e.offers.length.toString(),S.a.updateSmartListBadgeProps.getActionSender(i).send(o.a.shoppingSmartList,r)),!0}return!1}initShouldFire(){const{primaryServiceClientSettings:e,secondaryServiceClientSettings:t}=this.wcInstance.config,i=window.fetch.bind(window);let o=new F(i,e,this.wcInstance.config);o.getShoppingSmartListData(location.href).then(e=>{this.updateData(e)||(D.a.logError("Failed to fetch offers data from primary source"),t?(o=new F(i,t,this.wcInstance.config),o.getShoppingSmartListData(location.href).then(e=>{this.updateData(e)||D.a.logError("Failed to fetch offers data from secondary source")})):D.a.logError("Failed to fetch offers data from primary source. No fallback source available"))})}}var z=i("JnE6"),A=i("L1Sn");class R extends v.a{experienceConnected(){this.currentTime=Date.now();const e=y.a.getInstance().rootReducer.connector(O.a.SmartListSharedData);e&&S.a.registerSmartList.getActionSender(e).send(new E(this))}targetTopsSitesRectChanged(e,t){t?(this.currentTimerController=setInterval(()=>this.currentTime=Date.now(),1e3),setTimeout(()=>{this.shadowRoot.querySelectorAll(".telemetryAnchor").forEach(e=>{A.a.addElement(e),$.a.sendContentViewEvent(e,z.b.View)})},300)):this.currentTimerController&&clearInterval(this.currentTimerController)}getExperienceType(){return o.a.shoppingSmartListWC}onClosed(){this.targetTopsSitesRect=void 0}}Object(g.e)([b.d],R.prototype,"footer",void 0),Object(g.e)([b.d],R.prototype,"hoverFlyoutOpen",void 0),Object(g.e)([b.d],R.prototype,"numberOfFooterItems",void 0),Object(g.e)([b.d],R.prototype,"numberOfOfferItems",void 0),Object(g.e)([b.d],R.prototype,"offers",void 0),Object(g.e)([b.d],R.prototype,"requestOpen",void 0),Object(g.e)([b.d],R.prototype,"targetTopsSitesRect",void 0),Object(g.e)([b.d],R.prototype,"articleAriaHelpText",void 0),Object(g.e)([b.d],R.prototype,"currentTime",void 0),Object(g.e)([b.d],R.prototype,"currentTimerController",void 0);var N=i("6BDD"),P=i("6vBc"),B=i("UNqU"),H=i("cc39"),U=i("pcN6"),W=i("eUhr"),K=i("3KaK");H.a,U.a;const G=N.b`<a aria-label="${e=>e.ariaHelpText}" class="item" href="${e=>e.clickUrl}" rel="noopener" target="_blank">
+      <div class="offerItemContainerStyle telemetryAnchor" ${Object(W.b)(e=>e.telemetryTag)}>
+        <div class="offerItemBulletDiv">
+            ${e=>N.b`<div class= "${"offerItemBullet "+(e.isOfferExpired?"expiredOfferItemBullet":"validOfferItemBullet")}" />`}
+        </div>
+        <div class="${e=>e.isOfferExpired?"expiredOffer":"validOffer"}">
+            <div class="offerItemTitleDiv">
+                <span class="offerItemTitleText">
+                    ${e=>e.title}
+                </span>
+            </div>
+            <div class="offerItemDetailsDiv">
+                <span class="offerMerchantName">
+                    ${e=>e.merchantName}
+                </span>
+            </div>
+            ${e=>e.annotation?N.b`<div class="offerDecoration"><span>${e.annotation}</span></div>`:""}
+             ${e=>!e.annotation&&e.expiryUnixTime?N.b`
+                <div class="offerDecoration">
+                    <span class="offerTimerRoot">${function(e){if(e>864e5){const t=new Date(Date.now()+e);return`Valid till ${t.getDate()} ${t.toLocaleString("default",{month:"short"})} ${t.getFullYear()}`}e/=1e3;const t=Math.floor(e/3600);e%=3600;const i=Math.floor(e/60);return e=Math.floor(e%60),t>0?`${t} hours ${i>0?i+" mins":""}  to go`:i>0?`${i} mins ${e>0?e+" secs":""} to go`:e>0?e+" secs to go":void 0}(e.expiryUnixTime-e.currentTime)||e.offerExpiryText}</span>
+                </div>`:""}
+        </div>
+    </div>
+</a>`,V=N.b`<a aria-label="${e=>e.ariaHelpText}" class="item" href="${e=>{var t;return null===(t=e.link)||void 0===t?void 0:t.clickUrl}}" rel="noopener" target="_blank">
+    <div class="${e=>0===e.index?"footerFirstItemDivStyle":"footerItemDivStyle"} telemetryAnchor" ${Object(W.b)(e=>e.telemetryTag)}>
+        <div class="clickoutIconDiv">
+            ${e=>(e=>{const t=!Object(K.f)();switch(e){case"ShoppingDeals":return N.b`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048" width="16" height="16">
+                    <path d="M624 832q0 36-14 68t-38 56-56 38-68 14q-36 0-68-14t-56-38-38-56-14-68q0-36 14-68t38-56 56-38 68-14q36 0 68 14t56 38 38 56 14 68zm-176 80q33 0 56-23t24-57q0-33-23-56t-57-24q-33 0-56 23t-24 57q0 33 23 56t57 24zm512 128q36 0 68 14t56 38 38 56 14 68q0 36-14 68t-38 56-56 38-68 14q-36 0-68-14t-56-38-38-56-14-68q0-36 14-68t38-56 56-38 68-14zm0 256q33 0 56-23t24-57q0-33-23-56t-57-24q-33 0-56 23t-24 57q0 33 23 56t57 24zM842 640h108l-384 768H458l384-768zm566-256l640 640-640 640H0V384h1408zm-53 1152l512-512-512-512H128v1024h1227zm181-576q26 0 45 19t19 45q0 26-19 45t-45 19q-26 0-45-19t-19-45q0-26 19-45t45-19z" fill="${t?"#383838":"#F5F5F5"}"/>
+                    </svg>`;case"WeeklyAds":default:return N.b`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048" width="16" height="16">
+                    <path d="M1664 1426q39 14 83 35t83 50 64 67 26 86q0 52-22 95t-59 75-82 53-93 28v133h-128v-133q-35-5-68-17t-63-30-54-42-43-56l112-63q17 32 49 50t67 27v-266q-38-13-82-34t-83-50-65-68-26-86q0-52 22-95t59-75 82-52 93-29V896h128v133q34 5 67 17t64 30 54 42 43 56l-112 63q-17-32-49-50t-67-27v266zm-128-266q-21 5-43 15t-41 25-31 36-13 44q0 15 16 31t37 30 42 25 33 15v-221zm128 624q21-5 43-15t41-25 31-36 13-44q0-15-16-31t-37-30-42-24-33-16v221zm-490 8q20 36 41 67t53 61H128v-128h128q0-106 30-206t91-189q31-46 65-82t72-67 81-55 93-50q36-17 58-47t22-72q0-42-21-71t-59-47q-49-23-92-49t-82-56-72-68-65-82q-60-88-90-188t-31-207H128V128h1664v128h-128q0 106-30 206t-91 189q-31 45-65 82t-72 67-82 57-92 49q-37 17-58 46t-22 72q0 27 11 51t32 43q-16 29-25 61t-14 66q-60-34-96-93t-36-128q0-81 43-142t115-95q81-37 146-90t112-121 71-148 25-172H384q0 91 25 171t71 148 111 121 147 91q72 33 115 94t43 143q0 81-43 142t-115 95q-81 37-146 90t-112 121-71 148-25 172h790z" fill="${t?"#383838":"#F5F5F5"}"/>
+                    </svg>`}})(e.glyphType)}
+        </div>
+        <div class="clickoutLinkDiv">
+            <span class="clickoutLink">  ${e=>{var t;return null===(t=e.link)||void 0===t?void 0:t.text}} </span>
+        </div>
+    </div>
+</a>`,J=N.b`
+${Object(P.a)(e=>{var t;return!!e.targetTopsSitesRect&&(null===(t=e.offers)||void 0===t?void 0:t.length)},N.b`<hover-flyout
+    class="root"
+    :targetRect="${e=>e.targetTopsSitesRect}"
+    :flyoutWidth="${()=>I.CardSize.width}"
+    :requestOpen="${e=>e.hoverFlyoutOpen}"
+    :onClosed="${(e,t)=>e.onClosed.bind(e)}">
+        <div id="shoppingSmartListWC" class="telemetryAnchor" ${Object(W.b)(e=>e.telemetryObject.getMetadataTag())}>
+            <hover-flyout-list aria-label="${e=>e.strings.ariaLabelTrendingDeals}" @blurHandler=${e=>e.onClosed()}>
+                <div slot="list">
+                    ${Object(B.c)(e=>(e.offers||[]).map(t=>Object.assign(Object.assign({},t),{currentTime:e.currentTime})),G)}
+                    ${Object(B.c)(e=>e.footer||[],V)}
+                </div>
+            </hover-flyout-list>
+        </div>
+    </hover-flyout>`)}
+`;var Q=i("4X57"),_=i("kL0l"),X=i("0fst"),Z=i("3ZGc");const Y=Q.a`
+.item {
+    display: flex;
+    text-decoration: none;
+}
+.item:hover {
+    background: ${_.v.var};
+}
+.item:active {
+    background: ${_.u.var};
+}
+.item:focus {
+    background: ${_.u.var};
+}
+.root {
+    margin: 0 auto;
+    background-color:${_.J.var};
+    z-index: ${String(X.a.Flyout)};
+}
+.root::part(contentWrapper){
+    background-color:${_.J.var};
+}
+.clickoutIconDiv {
+    width: ${Object(Z.a)(I.FooterIconSize.width)};
+    height: ${Object(Z.a)(I.FooterIconSize.height)};
+    padding: 7px 6px;
+}
+.clickoutIconDiv svg{
+    width:100%;
+}
+.clickoutLink {
+    color: ${_.G.var};
+    line-height: 20px;
+    font-size: 14px;
+    overflow: hidden;
+    max-height: 20px;
+    white-space: nowrap;
+    display:inline-block;
+}
+.clickoutLinkDiv {
+    width: ${Object(Z.a)(I.FooterLinkSize.width)};
+    padding: 6px;
+    overflow: hidden;
+}
+.footerFirstItemDivStyle {
+    height: 32px;
+    display: flex;
+    padding: 6px 10px 0px 10px;
+}
+.footerItemDivStyle {
+    height: 34px;
+    display: flex;
+    padding: 0px 10px;
+}
+.offerItemContainerStyle {
+    color: ${_.k.var};
+    display: flex;
+    padding: 6px;
+    border-bottom: 1px solid;
+}
+.offerItemBullet {
+    width:	${Object(Z.a)(I.OfferListItemBulletSize.width)};
+    height:	${Object(Z.a)(I.OfferListItemBulletSize.height)};
+    border-radius: 4px;
+}
+.expiredOfferItemBullet {
+    background: ${_.D.var};
+}
+.validOfferItemBullet {
+    background: ${_.c.var};
+}
+.offerItemBulletDiv {
+    padding: 15px 6px;
+}
+.offerItemTitleDiv {
+    width: 278px;
+    overflow: hidden;
+    padding-bottom: 2px;
+}
+.offerItemTitleText {
+    color: ${_.G.var};
+    font-size: 14px;
+    line-height: 20px;
+    overflow: hidden;
+    box-sizing: content-box;
+    max-height: 20px;
+    white-space: nowrap;
+    font-weight: 600;
+}
+.offerItemDetailsDiv {
+    justify-content: flex-start;
+    overflow: hidden;
+    max-width: 118px;
+    padding-top: 2px;
+}
+.offerMerchantName {
+    line-height: 20px;
+    font-size: 14px;
+    overflow: hidden;
+    max-height: 20px;
+    white-space: nowrap;
+    font-weight: 600;
+}
+.offerDecoration {
+    overflow: hidden;
+    max-width: 140px;
+    line-height: 16px;
+    padding-top: 2px;
+    font-size: 12px;
+    padding-bottom: 1px;
+}
+.validOffer {
+    color: ${_.c.var};
+    padding: 6px;
+}
+.expiredOffer {
+    color: ${_.D.var};
+    padding: 6px;
+}
+`.withBehaviors(_.k,_.J,_.D,_.G,_.v,_.u,_.z),ee={experienceConfigSchema:m}},Pant:function(e,t,i){"use strict";i.d(t,"a",(function(){return s})),i.d(t,"b",(function(){return n}));var o=i("C49W"),r=i("wAA9");const s=(e,t,i,s,n,a,c,l)=>{const d=Object(o.e)(e,t,c,l);a&&Object.assign(d,{[r.a.propertyNames]:{enum:a}});const p=Object.assign(Object.assign({},n),{[r.a.title]:s});return Object.assign(d,{[r.a.additionalProperties]:p})},n=(e,t,i,o,r,n,a,c,l)=>({[e]:Object.assign({},s(t,i,o,r,n,a,c,l))})},cc39:function(e,t,i){"use strict";i.d(t,"a",(function(){return u}));var o=i("D57K"),r=i("P4Ao"),s=i("oePG"),n=i("6fq4"),a=i("Gy7L");class c extends r.a{constructor(){super(...arguments),this.isTransparent=!1,this.handleResize=()=>{this.onClosed(!0)},this.handleScroll=()=>{this.onClosed(!0)}}get styles(){if(!this.targetRect)return;const e=this.targetRect.top+this.targetRect.bottom<window.innerHeight;let t,i,o,r=Math.round((this.targetRect.left+this.targetRect.right-this.flyoutWidth)/2);r<16?r=16:r>innerWidth-16-this.flyoutWidth&&(r=innerWidth-16-this.flyoutWidth);const s=r+"px",n=this.flyoutWidth+"px";if(e){const e=this.targetRect.bottom+0;o=e+"px",i=window.innerHeight-e-16+"px"}else{t=window.innerHeight-this.targetRect.top+0+"px",i=this.targetRect.top-0-16+"px"}return`bottom: ${t}; left: ${s}; max-height: ${i};  top: ${o}; width: ${n};`}requestOpenChanged(e,t){t?(this.cancelCloseIfNeeded(),this.cancelStrayMouseTimerIfNeeded()):this.startStrayMouseTimerIfNeeded()}connectedCallback(){super.connectedCallback(),window.addEventListener("resize",this.handleResize),window.addEventListener("scroll",this.handleScroll),this.isTransparent=!0}disconnectedCallback(){window.removeEventListener("resize",this.handleResize),window.removeEventListener("scroll",this.handleScroll),this.cancelStrayMouseTimerIfNeeded(),this.cancelCloseIfNeeded()}handleBlur(e){this.focusInFlyout=!1,this.startStrayMouseTimerIfNeeded()}handleFocus(e){n.a&&(this.focusInFlyout=!0,this.cancelCloseIfNeeded(),this.cancelStrayMouseTimerIfNeeded())}handleKeyDown(e){e.keyCode===a.m&&this.onClosed(!0)}handleMouseEnter(e){this.mouseOverFlyout=!0,this.cancelCloseIfNeeded(),this.cancelStrayMouseTimerIfNeeded()}handleMouseLeave(e){this.mouseOverFlyout=!1,this.startStrayMouseTimerIfNeeded()}cancelCloseIfNeeded(){this.closeAnimationTimerHandle&&clearTimeout(this.closeAnimationTimerHandle),this.isTransparent||(this.isTransparent=!0)}cancelStrayMouseTimerIfNeeded(){this.strayMouseTimerHandle&&clearTimeout(this.strayMouseTimerHandle)}startStrayMouseTimerIfNeeded(){this.stra
