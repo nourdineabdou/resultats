@@ -1725,7 +1725,7 @@ return $html;
         $titre1_ar = $entete->titre1_ar;
         $titre2_ar = $entete->titre2_ar;
         $titre3_ar = $entete->titre3_ar;
-        $html = '<style>' . file_get_contents(url('css/style_pdf.css')) . '</style>';
+        $html = '';
         $num='';
 
 if ($etudiant) {
