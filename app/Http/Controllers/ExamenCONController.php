@@ -348,7 +348,7 @@ class ExamenCONController extends Controller
         $html=$entete;
         $html .='<div align="right"> <center><table style="width: 100%" border="1" align="right">
                 <tr>
-                   
+
                     <th align="right" style="width: 50%">'.trans('text_me.nom').'</th>
                     <th align="right" style="width: 20%">الرقم الوطني</th>
                      <th align="right" style="width: 20%">رقم الملف</th>
@@ -361,7 +361,7 @@ class ExamenCONController extends Controller
         {
            /* <!-- <td align="right" style="width: 30%"></td>-->*/
             $html .='<tr>
-                  
+
                     <td align="right" style="width: 50%">'.$cadidat->nompl.'</td>
                     <td align="right" style="width: 20%">'.$cadidat->nni.'</td>
                     <td align="right" style="width: 20%">'.$cadidat->id.'</td>
@@ -407,7 +407,7 @@ class ExamenCONController extends Controller
         $html=$entete;
         $html .='<div align="right"> <center><table style="width: 100%" border="1" align="right">
                 <tr>
-                   
+
                     <th align="right" style="width: 15%">'.trans('text_me.signature').'</th>
                     <th align="right" style="width: 42%">'.trans('text_me.nom').'</th>
                     <th align="right" style="width: 18%">الرقم الوطني</th>
@@ -421,7 +421,7 @@ class ExamenCONController extends Controller
         {
            /* <!-- <td align="right" style="width: 30%"></td>-->*/
             $html .='<tr>
-                  
+
                     <td align="right" style="width: 15%"></td>
                     <td align="right" style="width: 42%">'.trim($cadidat->nompl).'</td>
                     <td align="right" style="width: 18%">'.$cadidat->nni.'</td>
@@ -557,7 +557,7 @@ class ExamenCONController extends Controller
         $titre .='<br><table style="width:100%" >
                 <tr>
                     <th align="right" style="width: 50%">'. $salle_obj->libelle.' : '. trans('text_me.salle').'</th>
-               
+
                     <td align="right" style="width: 50%">'.MatieresConcour::find($matiere)->libelle.' : '. trans('text_me.matiere').'</td>
                 </tr>
                 </table>
@@ -569,7 +569,7 @@ class ExamenCONController extends Controller
                 <tr>
                     <th align="right" style="width: 30%">'.trans('text_me.note').'</th>
                    <th align="right" style="width: 60%">'.trans('text_me.note').'</th>
-                   
+
                     <th align="right" style="width: 10%">'.trans('text_me.anonymat').'</th>
                 </tr>';
         $cadidats=Anonymatsconcour::whereIn('candidat_id',Candidat::where('salle_id',$salle)->get()->pluck("id"))->orderby('anonymat')->get();
@@ -620,7 +620,7 @@ class ExamenCONController extends Controller
         $html .='<div align="right"> <center><table style="width: 100%" border="1" align="right">
                 <tr>
                     <th align="right" style="width: 30%">'.trans('text_me.note_ar').'</th>
-                    
+
                     <th align="right" style="width: 30%">'.trans('text_me.anonymat_ar').'</th>
                     <th align="right" style="width: 40%">'.trans('text_me.numero').'</th>
                 </tr>';
@@ -632,7 +632,7 @@ class ExamenCONController extends Controller
                     <td align="right" style="width: 30%"><input type="checkbox"></td>
                     <td align="center" style="width: 30%">'.$etuidant->anonymat.'</td>
                     <td align="right" style="width: 40%">'.$etuidant->nodos.'</td>
-                    
+
                 </tr>';
         }
         $html .='
@@ -819,7 +819,7 @@ class ExamenCONController extends Controller
                     <th align="right" style="width: 5%"></th>
                     <td align="right" style="width: 95%">'.MatieresConcour::find(3)->libelle.' </td>
                 </tr>
-               
+
                 <tr>
                     <th align="right" style="width: 5%"></th>
                     <td align="center" style="width: 95%">محضر النقاط </td>
@@ -832,7 +832,7 @@ class ExamenCONController extends Controller
                     <th align="right" style="width: 5%"></th>
                     <td align="center" style="width: 95%">الغلاف 1 </td>
                 </tr>
-                 
+
                 </table>
                 ';
         $entete = $this->entete($titre, 'L');
@@ -873,7 +873,7 @@ class ExamenCONController extends Controller
                     <br><br><font size="8"><b>
                     ملاحظة :يجب ان يكون المحضر خاليا من اي شطب او تفخيم اما في
                     <br>
-                    حالة غياب المتسابق يجب ان تترك الخانة المناسبة فارغة 
+                    حالة غياب المتسابق يجب ان تترك الخانة المناسبة فارغة
                     </b></font>
                     </div>';
                 $html .='<div style="page-break-after: always"></div>';
@@ -882,7 +882,7 @@ class ExamenCONController extends Controller
                     <th align="right" style="width: 5%"></th>
                     <td align="right" style="width: 95%">'.MatieresConcour::find(3)->libelle.' </td>
                 </tr>
-               
+
                 <tr>
                     <th align="right" style="width: 5%"></th>
                     <td align="center" style="width: 95%">محضر النقاط </td>
@@ -924,7 +924,7 @@ class ExamenCONController extends Controller
                     <br><br><font size="8"><b>
                     ملاحظة :يجب ان يكون المحضر خاليا من اي شطب او تفخيم اما في
                     <br>
-                    حالة غياب المتسابق يجب ان تترك الخانة المناسبة فارغة 
+                    حالة غياب المتسابق يجب ان تترك الخانة المناسبة فارغة
                     </b></font>
                     </div>';
         PDF::SetAuthor('unisof');
@@ -952,7 +952,7 @@ class ExamenCONController extends Controller
                     <th align="right" style="width: 5%"></th>
                     <td align="right" style="width: 95%">'.MatieresConcour::find(3)->libelle.' </td>
                 </tr>
-               
+
                 <tr>
                     <th align="right" style="width: 5%"></th>
                     <td align="center" style="width: 95%">النتائج النهائية </td>
@@ -1010,7 +1010,7 @@ class ExamenCONController extends Controller
                     <th align="right" style="width: 5%"></th>
                     <td align="right" style="width: 95%">'.MatieresConcour::find(3)->libelle.' </td>
                 </tr>
-               
+
                 <tr>
                     <th align="right" style="width: 5%"></th>
                     <td align="center" style="width: 95%">النتائج النهائية </td>
@@ -1094,7 +1094,7 @@ class ExamenCONController extends Controller
             $html .=' <td align="right" style="width: 20%">'.$candidat->candidat->nompl.' </td>
                     <td align="right" style="width: 8%">'.$candidat->candidat->nni.'  </td>
                     <td align="right" style="width: 5%">'.$candidat->anonymatsconcour->anonymat.' </td>
-                    <td align="right" style="width: 5%">'.$candidat->candidat_id.' </td> 
+                    <td align="right" style="width: 5%">'.$candidat->candidat_id.' </td>
                     <td align="right" style="width: 4%">'.$nbre.' </td>
             </tr>';
         }
@@ -1186,7 +1186,7 @@ class ExamenCONController extends Controller
             $html .=' <td align="right" style="width: 20%">'.$candidat->candidat->nompl.' </td>
                     <td align="right" style="width: 8%">'.$candidat->candidat->nni.'  </td>
                     <td align="right" style="width: 5%">'.$candidat->anonymatsconcour->anonymat.' </td>
-                    <td align="right" style="width: 5%">'.$candidat->candidat_id.' </td> 
+                    <td align="right" style="width: 5%">'.$candidat->candidat_id.' </td>
                     <td align="right" style="width: 4%">'.$nbre.' </td>
             </tr>';
         }
@@ -1229,7 +1229,7 @@ class ExamenCONController extends Controller
                     <th align="right" style="width: 5%"></th>
                     <td align="right" style="width: 95%">'.MatieresConcour::find(3)->libelle.' </td>
                 </tr>
-               
+
                 <tr>
                     <th align="right" style="width: 5%"></th>
                     <td align="center" style="width: 95%">التوهيم </td>
@@ -1242,7 +1242,7 @@ class ExamenCONController extends Controller
                     <th align="right" style="width: 5%"></th>
                     <td align="center" style="width: 95%">الغلاف 1 </td>
                 </tr>
-                 
+
                 </table>
                 ';
         $entete = $this->entete($titre, 'L');
@@ -1278,7 +1278,7 @@ class ExamenCONController extends Controller
                     <th align="right" style="width: 5%"></th>
                     <td align="right" style="width: 95%">'.MatieresConcour::find(3)->libelle.' </td>
                 </tr>
-               
+
                 <tr>
                     <th align="right" style="width: 5%"></th>
                     <td align="center" style="width: 95%">التوهيم </td>
@@ -1334,7 +1334,7 @@ class ExamenCONController extends Controller
                     <th align="right" style="width: 5%"></th>
                     <td align="right" style="width: 95%">'.MatieresConcour::find(3)->libelle.' </td>
                 </tr>
-               
+
                 <tr>
                     <th align="right" style="width: 5%"></th>
                     <td align="center" style="width: 95%">التصحيح الثالث </td>
@@ -1347,7 +1347,7 @@ class ExamenCONController extends Controller
                     <th align="right" style="width: 5%"></th>
                     <td align="center" style="width: 95%">الغلاف 1 </td>
                 </tr>
-                 
+
                 </table>
                 ';
         $entete = $this->entete($titre, 'L');
@@ -1383,7 +1383,7 @@ class ExamenCONController extends Controller
                     <th align="right" style="width: 5%"></th>
                     <td align="right" style="width: 95%">'.MatieresConcour::find(3)->libelle.' </td>
                 </tr>
-               
+
                 <tr>
                     <th align="right" style="width: 5%"></th>
                     <td align="center" style="width: 95%">التصحيح الثالث </td>
@@ -1429,7 +1429,7 @@ return $html;
                     <th align="right" style="width: 5%"></th>
                     <td align="right" style="width: 95%">'.MatieresConcour::find(3)->libelle.' </td>
                 </tr>
-               
+
                 <tr>
                     <th align="right" style="width: 5%"></th>
                     <td align="center" style="width: 95%">التوهيم </td>
@@ -1442,7 +1442,7 @@ return $html;
                     <th align="right" style="width: 5%"></th>
                     <td align="center" style="width: 95%">الغلاف 1 </td>
                 </tr>
-                 
+
                 </table>
                 ';
         $entete = $this->entete($titre, 'L');
@@ -1476,7 +1476,7 @@ return $html;
                     <th align="right" style="width: 5%"></th>
                     <td align="right" style="width: 95%">'.MatieresConcour::find(3)->libelle.' </td>
                 </tr>
-               
+
                 <tr>
                     <th align="right" style="width: 5%"></th>
                     <td align="center" style="width: 95%">التوهيم </td>
@@ -1737,7 +1737,7 @@ if ($etudiant) {
         //dd($html);
         $entet_fr = '<table width="100%" ><tr><td "> ' . $num . '</td></tr><tr><td align="right">' . $titre2 . '</td></tr><tr><td align="right">' . $titre3 . '</td></tr></table>';
         $entet_ar = '<table width="100%" style="font-size: 16px;"><tr><td align="right">' . $titre1_ar . '</td></tr><tr><td align="right">' . $titre2_ar . '</td></tr><tr><td align="right">' . $titre3_ar . '</td></tr></table>';
-        $logo = '<table  width="100%"><tr ><td align="center"><img src="'.public_path('img/logoRim.jpg').'"alt="avatar" style="width:80px; height: 80px;"  /></td></tr></table>';
+        $logo = '<table  width="100%"><tr ><td align="center"><img src="'.asset('img/logoRim.jpg').'"alt="avatar" style="width:80px; height: 80px;"  /></td></tr></table>';
         $table = '<table width="100%"><tr><td align="right">' . $entet_fr . '</td><td >' . $logo . '</td><td align="right">' . $entet_ar . '</td></tr></table>';
         $html .= $table;
 
@@ -1773,7 +1773,7 @@ if ($etudiant) {
     {
         $html ='<table width="100%" align="right" border="1">
                 <tr align="right">
-                
+
                 <td  align="right" width="50%">'.trans("text_me.anonymat").'</td>
                 <td align="center" width="50%">'.trans("text_me.note").'</td>
                 </tr>';
@@ -1817,7 +1817,7 @@ if ($etudiant) {
     {
         $html ='<table width="100%" align="right" border="1">
                 <tr align="right">
-                
+
                 <td  align="right" width="50%">'.trans("text_me.anonymat").'</td>
                 <td align="center" width="50%">'.trans("text_me.note").'</td>
                 </tr>';
