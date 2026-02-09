@@ -23,6 +23,7 @@ Route::post('authentification1', 'HomeController@authenticate1');
 Route::get('sorties', 'HomeController@sorties');
 Route::get('selectModule/{id}', 'HomeController@selectModule');
 Route::get('home', 'HomeController@dashboard')->name('home');
+Route::get('getbiltinsFondamental', 'editionsRoute@getbiltinsFondamental')->name('home');
 Route::get('dashboard/{id}', 'HomeController@dashboard')->name('dashboard');
 
 Auth::routes();

@@ -1735,10 +1735,10 @@ if ($etudiant) {
     $etudi->save();
     $num='   النسخة رقم :'.$nunbr; }
         //dd($html);
-        $entet_fr = '<table><tr><td class="titre' . $class . '"> ' . $num . '</td></tr><tr><td class="titre2' . $class . '">' . $titre2 . '</td></tr><tr><td class="titre3' . $class . '">' . $titre3 . '</td></tr></table>';
-        $entet_ar = '<table ><tr><td class="titre_ar' . $class . '">' . $titre1_ar . '</td></tr><tr><td class="titre2_ar' . $class . '">' . $titre2_ar . '</td></tr><tr><td class="titre3_ar' . $class . '">' . $titre3_ar . '</td></tr></table>';
-        $logo = '<table  ><tr ><td align="center"><input><img src="' . $entete->logo . '" alt="avatar"  /></td></tr></table>';
-        $table = '<table><tr><td class="t_left' . $class . '">' . $entet_fr . '</td><td class="t_center' . $class . '">' . $logo . '</td><td class="t_right' . $class . '">' . $entet_ar . '</td></tr></table>';
+        $entet_fr = '<table width="100%" ><tr><td "> ' . $num . '</td></tr><tr><td align="right">' . $titre2 . '</td></tr><tr><td align="right">' . $titre3 . '</td></tr></table>';
+        $entet_ar = '<table width="100%" style="font-size: 16px;"><tr><td align="right">' . $titre1_ar . '</td></tr><tr><td align="right">' . $titre2_ar . '</td></tr><tr><td align="right">' . $titre3_ar . '</td></tr></table>';
+        $logo = '<table  width="100%"><tr ><td align="center"><img src="'.env("APP_URLIMP").'img/logoRim.jpg"alt="avatar" style="width:80px; height: 80px;"  /></td></tr></table>';
+        $table = '<table width="100%"><tr><td align="right">' . $entet_fr . '</td><td >' . $logo . '</td><td align="right">' . $entet_ar . '</td></tr></table>';
         $html .= $table;
 
         $titre_entete = '<br><h4 class="titre_entete">' . $titre . '<br><br></h4>';

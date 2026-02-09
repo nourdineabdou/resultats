@@ -547,15 +547,15 @@ foreach ($anonyms as $anony){
         $etudiant = Etudiant::find($id);
         $etds =EtudMat::where('annee_id',$annee->id)->where('etudiant_id',$id)->get()->first();
         $profil= $etds->profil_id;
-
+		
 		 $maitierRest = App\Models\RelevesNote::where('etudiant_id', $id)
                             ->where('annee_id', $annePasse)->where('decision', 0)->orderBy('ref_semestre_id')->get();
                         if ($maitierRest->count() > 0) {
 							foreach($maitierRest as $maitief){
 						$MtMatv  = EtudMat::where('etudiant_id',$id)->where('matiere_id',$maitief->matiere_id)->where('annee_id',$annee->id)->orderBy('ref_semestre_id')->get();
 								if($MtMatv ->count()>0){}
-								else{
-
+								else{		
+						
 													$matiere1=Matiere::find($maitief->matiere_id);
 													$etd_mat = new EtudMat();
 													$etd_mat->etudiant_id = $id;
@@ -570,17 +570,17 @@ foreach ($anonyms as $anony){
 								}
 						}
 						}
-
-
-
-
-
-
-
-
-
-
-
+						
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
        /* $etdsss= EtudMat::where('profil_id',75)->where('matiere_id',1031)->where('annee_id',4)->orderBy('ref_semestre_id')->get();
         foreach ($etdsss as $etdsmm)
         {
@@ -725,18 +725,20 @@ foreach ($anonyms as $anony){
         $html = $exm->entete($titre.'<br>'.$annee->libelle.'','P',false,$etudiant);
         $html .=$this->infosEtudiant($etudiant);
         $html .=$this->infosInscription($etudiantMat,$etudiant->groupe);
-        dd($html);
-        PDF::SetAuthor('unisof');
+		 return view('getbiltinsFondamental',['html'=>$html]);
+        
+        /*PDF::SetAuthor('unisof');
         PDF::SetTitle(''.trans('text_me.attestation').'');
         PDF::SetSubject(''.trans('text_me.attestation').'');
-        PDF::SetMargins(10, 10, 10);
+        PDF::SetMargins(2, 2, 2);
         PDF::SetFontSubsetting(false);
         PDF::SetFontSize('10px');
         PDF::SetAutoPageBreak(TRUE);
         PDF::AddPage('P', 'A4');
         PDF::SetFont('aefurat', '', 12);
         PDF::writeHTML($html, true, false, true, false, '');
-        PDF::Output(uniqid().''.''.trans('text_me.liste_note').''.'.pdf');
+        PDF::Output(uniqid().''.''.trans('text_me.liste_note').''.'.pdf');*/
+		
     }
     public function exporteattestationPDFSP($id)
     {
@@ -796,7 +798,7 @@ foreach ($anonyms as $anony){
     }
     public  function infosEtudiant($etudiant,$profil1='',$anne='')
     {
-        $html ='<table style="width: 100%" border="">
+        $html ='<table style="width: 100%" border="0">
             <tr>
             <td style="width: 15%">
                 <table style="width: 100%" >
@@ -823,11 +825,11 @@ foreach ($anonyms as $anony){
                 <table style="width: 100%" >
                     <tr>
                         <td align="right" style="width: 50%">'.$etudiant->DATN.'</td>
-                        <td align="right" style="width: 50%">'.trans("text_me.dateN").':</td>
+                        <td align="right" style="width: 50%">:'.trans("text_me.dateN").'</td>
                     </tr>
                     <tr>
                         <td align="right" style="width: 50%">'.$etudiant->NNI.'</td>
-                        <td align="right" style="width: 50%">'.trans("text_me.nni").':</td>
+                        <td align="right" style="width: 50%">:'.trans("text_me.nni").'</td>
                     </tr>
                 </table>
             </td>
@@ -835,7 +837,7 @@ foreach ($anonyms as $anony){
                 <table style="width: 100%" >
                     <tr>
                         <td align="right" style="width: 70%">'.$etudiant->NODOS.'</td>
-                        <td align="right" style="width: 30%">'.trans("text_me.nodos").':</td>
+                        <td align="right" style="width: 30%">:'.trans("text_me.nodos").'</td>
                     </tr>
                     <tr>
                         <td align="right" style="width: 70%">';
@@ -851,11 +853,11 @@ foreach ($anonyms as $anony){
                             $html .=' '.$etudiant->NOMA .' '.$etudiant->NOMF;
 						//}
 						$html .='</td>
-                        <td align="right" style="width: 30%">'.trans("text_me.nom").':</td>
+                        <td align="right" style="width: 30%">:'.trans("text_me.nom").'</td>
                     </tr>
                     <tr>
                         <td align="right" style="width: 70%">'.$etudiant->LIEUNA.'</td>
-                        <td align="right" style="width: 30%">'.trans("text_me.lieuN").':</td>
+                        <td align="right" style="width: 30%">:'.trans("text_me.lieuN").'</td>
                     </tr>';
         $annee=Annee::where('etat',1)->get()->first();
 						if ($anne==''){ $annee=Annee::where('etat',1)->get()->first();}
@@ -869,7 +871,7 @@ foreach ($anonyms as $anony){
                     //- '.$profil->departement->libelle.'
                     $html .='<tr>
                         <td align="right" style="width: 70%">'.$profil->ref_niveau_etude->libelle.' - '.$profil->libelle.'</td>
-                        <td align="right" style="width: 30%">'.trans("text_me.profil").':</td>
+                        <td align="right" style="width: 30%">:'.trans("text_me.profil").'</td>
                     </tr>
                 </table>
 </td>
@@ -885,7 +887,7 @@ foreach ($anonyms as $anony){
           $t=$etudiantMat->first()->profil_id;
           $ip=Profil::find($t)->ref_niveau_etude_id;
         }
-        $html ='<table style="width: 100%" border="">
+        $html ='<table style="width: 100%" border="0">
             <tr>
                 <td align="center" style="width: 30%"><b>الوحدة</b></td>
                 <td align="center" style="width: 10%"><b>الرصيد</b></td>
@@ -931,9 +933,9 @@ $idverifexiste=0;$cptmt=0;
         }
 
         $html .='</table>';
-        $html .='<table><tr><td align="right"><b>عدد العناصر :'.$cptmt.'</b></td></tr></table>';
-        $html .='<br><br><br><br><table><tr><td align="left"><b>رئيس مصلحة الشؤون الطلابية</b></td></tr>';
-		$html .='<tr><td align="left"><img src="img/signatureseedt.PNG" alt="" width="200" height="100"/></td></tr>';
+        $html .='<table border=0><tr><td align="right"><b> عدد العناصر :'.$cptmt.' </b></td></tr></table>';
+        $html .='<br><br><br><br><table border=0><tr><td align="left"><b>رئيس مصلحة الشؤون الطلابية</b></td></tr>';
+		$html .='<tr><td align="left"><img src="'.env("APP_URLIMP").'img/signatureseedt.PNG" alt="" width="200" height="200"/></td></tr>';
 		$html .='</table>';
         return $html;
     }
@@ -1009,7 +1011,7 @@ $idverifexiste=0;$cptmt=0;
                     <th align="right" style="width: 8%">باك</th>
                     <th align="right" style="width: 10%">رقم التسجيل</th>
                 </tr>';
-
+				
         foreach ($etudiants as $etudiant)
         {
                  $etdSUPs =EtudMat::where('annee_id',$annee->id)
@@ -1370,7 +1372,7 @@ $cp +=1;
         $html='';
         $html .='<table style="width: 100%;" border="1">
                     <tr>
-
+                    
                      <td align="center">لغة التكوين</td>
                      <td align="center">الجنسية</td>
                      <td align="center">ذا كان  الجواب نعم حدد   المؤسسة  القادم منها</td>
@@ -1493,7 +1495,7 @@ $cp +=1;
                          <td style="" align="right">الحميع</td>
                           <td style="" align="right">الجدد</td>
                             <td style="" align="right">الاناث</td>
-
+                           
                             <td style="" align="right">الذكور</td>
                         </tr>
                          <tr>
