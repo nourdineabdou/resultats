@@ -547,15 +547,15 @@ foreach ($anonyms as $anony){
         $etudiant = Etudiant::find($id);
         $etds =EtudMat::where('annee_id',$annee->id)->where('etudiant_id',$id)->get()->first();
         $profil= $etds->profil_id;
-		
+
 		 $maitierRest = App\Models\RelevesNote::where('etudiant_id', $id)
                             ->where('annee_id', $annePasse)->where('decision', 0)->orderBy('ref_semestre_id')->get();
                         if ($maitierRest->count() > 0) {
 							foreach($maitierRest as $maitief){
 						$MtMatv  = EtudMat::where('etudiant_id',$id)->where('matiere_id',$maitief->matiere_id)->where('annee_id',$annee->id)->orderBy('ref_semestre_id')->get();
 								if($MtMatv ->count()>0){}
-								else{		
-						
+								else{
+
 													$matiere1=Matiere::find($maitief->matiere_id);
 													$etd_mat = new EtudMat();
 													$etd_mat->etudiant_id = $id;
@@ -570,17 +570,17 @@ foreach ($anonyms as $anony){
 								}
 						}
 						}
-						
-								
-								
-								
-								
-								
-								
-								
-								
-								
-								
+
+
+
+
+
+
+
+
+
+
+
        /* $etdsss= EtudMat::where('profil_id',75)->where('matiere_id',1031)->where('annee_id',4)->orderBy('ref_semestre_id')->get();
         foreach ($etdsss as $etdsmm)
         {
@@ -725,6 +725,7 @@ foreach ($anonyms as $anony){
         $html = $exm->entete($titre.'<br>'.$annee->libelle.'','P',false,$etudiant);
         $html .=$this->infosEtudiant($etudiant);
         $html .=$this->infosInscription($etudiantMat,$etudiant->groupe);
+        dd($html);
         PDF::SetAuthor('unisof');
         PDF::SetTitle(''.trans('text_me.attestation').'');
         PDF::SetSubject(''.trans('text_me.attestation').'');
@@ -1008,7 +1009,7 @@ $idverifexiste=0;$cptmt=0;
                     <th align="right" style="width: 8%">باك</th>
                     <th align="right" style="width: 10%">رقم التسجيل</th>
                 </tr>';
-				
+
         foreach ($etudiants as $etudiant)
         {
                  $etdSUPs =EtudMat::where('annee_id',$annee->id)
@@ -1369,7 +1370,7 @@ $cp +=1;
         $html='';
         $html .='<table style="width: 100%;" border="1">
                     <tr>
-                    
+
                      <td align="center">لغة التكوين</td>
                      <td align="center">الجنسية</td>
                      <td align="center">ذا كان  الجواب نعم حدد   المؤسسة  القادم منها</td>
@@ -1492,7 +1493,7 @@ $cp +=1;
                          <td style="" align="right">الحميع</td>
                           <td style="" align="right">الجدد</td>
                             <td style="" align="right">الاناث</td>
-                           
+
                             <td style="" align="right">الذكور</td>
                         </tr>
                          <tr>
