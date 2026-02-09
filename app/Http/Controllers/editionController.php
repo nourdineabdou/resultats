@@ -935,7 +935,7 @@ $idverifexiste=0;$cptmt=0;
         $html .='</table>';
         $html .='<table border=0><tr><td align="right"><b> عدد العناصر :'.$cptmt.' </b></td></tr></table>';
         $html .='<br><br><br><br><table border=0><tr><td align="left"><b>رئيس مصلحة الشؤون الطلابية</b></td></tr>';
-		$html .='<tr><td align="left"><img src="'.env("APP_URLIMP").'img/signatureseedt.PNG" alt="" width="200" height="200"/></td></tr>';
+		$html .='<tr><td align="left"><img src="'.public_path('img/signatureseedt.PNG').'" alt="" width="200" height="200"/></td></tr>';
 		$html .='</table>';
         return $html;
     }

@@ -1737,11 +1737,11 @@ if ($etudiant) {
         //dd($html);
         $entet_fr = '<table width="100%" ><tr><td "> ' . $num . '</td></tr><tr><td align="right">' . $titre2 . '</td></tr><tr><td align="right">' . $titre3 . '</td></tr></table>';
         $entet_ar = '<table width="100%" style="font-size: 16px;"><tr><td align="right">' . $titre1_ar . '</td></tr><tr><td align="right">' . $titre2_ar . '</td></tr><tr><td align="right">' . $titre3_ar . '</td></tr></table>';
-        $logo = '<table  width="100%"><tr ><td align="center"><img src="'.env("APP_URLIMP").'img/logoRim.jpg"alt="avatar" style="width:80px; height: 80px;"  /></td></tr></table>';
+        $logo = '<table  width="100%"><tr ><td align="center"><img src="'.public_path('img/logoRim.jpg').'"alt="avatar" style="width:80px; height: 80px;"  /></td></tr></table>';
         $table = '<table width="100%"><tr><td align="right">' . $entet_fr . '</td><td >' . $logo . '</td><td align="right">' . $entet_ar . '</td></tr></table>';
         $html .= $table;
 
-        $titre_entete = '<br><h4 class="titre_entete">' . $titre . '<br><br></h4>';
+        $titre_entete = '<br><p align="center"><h4 align="center">' . $titre . '<br><br></h4></p>';
         $html .= $titre_entete;
         return $html;
     }
