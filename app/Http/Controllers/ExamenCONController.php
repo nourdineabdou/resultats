@@ -1741,7 +1741,7 @@ if ($etudiant) {
         $table = '<table width="100%"><tr><td align="right">' . $entet_fr . '</td><td >' . $logo . '</td><td align="right">' . $entet_ar . '</td></tr></table>';
         $html .= $table;
 
-        $titre_entete = '<br><p align="center"><h4 align="center">' . $titre . '<br><br></h4></p>';
+        $titre_entete = '<h4 align="center">' . $titre . '</h4>';
         $html .= $titre_entete;
         return $html;
     }
