@@ -2192,7 +2192,7 @@ class ExamenController extends Controller
         $moyen_sem=$this->moyenne_semestre($id,$semestre,$groupe,$id_annee);
         $etudiant =Etudiant::find($id);
         $html ='';
-        dd(')');
+        //dd(')');
         $releves66as = App\Models\RelevesNote::where('profil_id',$profil)
             ->where('ref_semestre_id', $semestre)->where('note','>', 1)->where('etudiant_id', $id)
             ->where('annee_id', $id_annee)->orderBy('matiere_id','DESC')->orderBy('id','DESC')->get();
