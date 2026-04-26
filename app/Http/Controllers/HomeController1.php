@@ -24,7 +24,7 @@ class HomeController extends Controller
         $annee=Annee::where('etat',1)->get()->first();
         $etudiant = Etudiant::where('NODOS',$nodos)->orderBy('id','DESC')->get()->first();
         $test1 =EtudMat::where('annee_id',$annee->id)->where('etudiant_id',$etudiant->id)->orderBy('ref_semestre_id')->get();
-        $html='<div class="col-md-12 text-center form-group " align="center">'.$etudiant->NODOS.' <br>'.$etudiant->NOMF.' / '.$etudiant->NOMA.'</div>';
+        $html='<div class="col-md-12 text-center form-group " align="center">'.$etudiant->NODOS.' <br>'.$etudiant->NOMF.' /** '.$etudiant->NOMA.'</div>';
         if ($test1->count()>0){
             $semestres=RefSemestre::where('etat',1)->get();
             foreach ($semestres as $semestre)
