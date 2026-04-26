@@ -2312,7 +2312,7 @@ if ($releve->note_dev == -1 or $releve->note_dev ==-3){ $rnote_dev =''; }
                 }
 
                 $html1 .= '</b></td>
-                    <td style="width: 40%" align="right"><b>';
+                    <td style="width: 40%" align="right"><b>---***';
                 if ($mttt) {
                     $html1 .= '' . $releve->matiere->libelle . '';
                 }
