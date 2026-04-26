@@ -2276,11 +2276,11 @@ class ExamenController extends Controller
                 }
                 $html1 .= '<tr><td style="width: 10%" align="right"><b>';
                 if ($releve->decision == 2) {
-                    $html1 .= '' . trans("text_me.novalide");
-                    // $html1 .= '' . trans("text_me.rattrapage");
-                    //$validM = 2;
+                  //  $html1 .= '' . trans("text_me.novalide");
+                     $html1 .= '' . trans("text_me.rattrapage");
+                    $validM = 2;
                     $vsem = 0;
-                    $validM = 0;
+                   // $validM = 0;
                 }
                 if ($releve->decision == 0) {
                     $html1 .= '' . trans("text_me.novalide");
