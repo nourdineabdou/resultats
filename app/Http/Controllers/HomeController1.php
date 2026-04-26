@@ -22,7 +22,12 @@ class HomeController extends Controller
         $html='';
     if ($nodos!=''){
         $annee=Annee::where('etat',1)->get()->first();
-        $etudiant = Etudiant::where('NODOS',$nodos)->orderBy('id','DESC')->get()->first();
+        $etudiant = Etudiant::join('etud_mats', 'etudiants.id', '=', 'etud_mats.etudiant_id')
+    ->where('etudiants.NODOS', $nodos)
+    ->where('etud_mats.annee_id', $annee->id)
+    ->orderBy('etudiants.id', 'DESC')
+    ->select('etudiants.*')
+    ->first();
         $test1 =EtudMat::where('annee_id',$annee->id)->where('etudiant_id',$etudiant->id)->orderBy('ref_semestre_id')->get();
         $html='<div class="col-md-12 text-center form-group " align="center">'.$etudiant->NODOS.' <br>'.$etudiant->NOMF.' /** '.$etudiant->NOMA.'</div>';
         if ($test1->count()>0){
