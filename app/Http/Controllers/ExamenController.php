@@ -2355,7 +2355,7 @@ if ($releve->note_dev == -1 or $releve->note_dev ==-3){ $rnote_dev =''; }
 
                 </tr>';
             $niveau = Profil::find($profil)->ref_niveau_etude_id;
-            $html .= ' </table><br><br>
+            $html .= ' </table><br>****<br>
 
  ';
         }
