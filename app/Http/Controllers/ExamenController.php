@@ -2323,8 +2323,8 @@ if ($releve->note_dev == -1 or $releve->note_dev ==-3){ $rnote_dev =''; }
 
             $html .= '<tr><td style="width: 10%" align="right"><b>';
             if ($validM == 2) {
-                // $html .= '' . trans("text_me.rattrapage");
-                $html .= '' . trans("text_me.novalidee");
+                 $html .= '' . trans("text_me.rattrapage");
+              //  $html .= '' . trans("text_me.novalidee");
             }
             if ($validM == 0) {
                 $html .= '' . trans("text_me.novalidee");
@@ -2344,8 +2344,8 @@ if ($releve->note_dev == -1 or $releve->note_dev ==-3){ $rnote_dev =''; }
             if ($moyen_sem >= 10 && $vsem == 1) {
                 $html .= '' . trans("text_me.valide");
             } else {
-                // $html .= '' . trans("text_me.rattrapage");
-                $html .= '' . trans("text_me.novalidee");
+                 $html .= '' . trans("text_me.rattrapage");
+               // $html .= '' . trans("text_me.novalidee");
             }
 
             $html .= ' </b></td>
