@@ -77,6 +77,9 @@ class Bachelier extends Model
 		'noprfl',
 		'nni',
 		'annee',
+		'carte_identite',
+		'bac_document',
+		'photo_personnelle',
 		'etat'
 	];
 }
