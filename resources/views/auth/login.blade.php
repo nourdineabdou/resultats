@@ -1007,7 +1007,7 @@ footer b {
                 <h1>المعهد العالي للدراسات و البحوث الاسلامية</h1>
 
                 <h2>
-                    Institut Supérieur des Études et des Technologies
+                    Institut Supérieur des Études et des Recherches Islamiques (ISERI)
                 </h2>
 
                 <div class="brand-line"></div>
@@ -1080,7 +1080,7 @@ footer b {
                 </div>
 
                 <div>
-                    <h5>الطلبة المسجلون</h5>
+                    <h5>الطلبة المسجلون سابقا</h5>
                     <h6>Étudiants déjà inscrits</h6>
                 </div>
 
