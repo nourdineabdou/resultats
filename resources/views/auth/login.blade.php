@@ -1007,7 +1007,7 @@ footer b {
                 <h1>المعهد العالي للدراسات و البحوث الاسلامية</h1>
 
                 <h2>
-                    Institut Supérieur des Études et des Recherches Islamiques (ISERI)
+                    Institut Supérieur des Études et des Recherches Islamiques ( ISERI )
                 </h2>
 
                 <div class="brand-line"></div>
