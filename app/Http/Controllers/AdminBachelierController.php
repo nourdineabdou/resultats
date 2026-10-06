@@ -171,7 +171,8 @@ class AdminBachelierController extends Controller
         $etudiant->LIEUNA = $bachelier->lieuna;
         $etudiant->profil_id = $bachelier->nat;
 
-        $etudiant->groupe = $groupe;
+        $etudiant->groupe = '';
+		$etudiant->photo = $bachelier->photo_personnelle;
         $etudiant->SEXE = $bachelier->sexe;
         $etudiant->whatsapp = $bachelier->tel;
 
