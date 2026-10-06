@@ -926,7 +926,7 @@ $idverifexiste=0;$cptmt=0;
                 <td align="center">' . $mat->matiere->modulle->libelle . '</td>
                 <td align="center">' . $mat->matiere->credit . '</td>
                 <td align="right">' . $mat->matiere->libelle . '</td>
-                <td align="center"> ' . $groupe . ' </td>
+                <td align="center"> </td>
                 <td align="center">' . $mat->ref_semestre_id . '</td>
             </tr>';
         }
