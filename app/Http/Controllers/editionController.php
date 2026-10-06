@@ -676,7 +676,7 @@ foreach ($anonyms as $anony){
             }
             else{
 
-                if ($etudiant->NODOS > '29219') {
+                if ($etudiant->NODOS > '32591') {
 
                     $etd_mat = new EtudMat();
                     $etd_mat->etudiant_id = $id;
@@ -904,7 +904,7 @@ $idverifexiste=0;$cptmt=0;
         foreach ($etudiantMat as $mat) {
             //dd($mat->matiere_id);
 			//$cptmt=0;
-			$idverifexiste=0;
+			$idverifexiste=0;$groupe ='';
             $releves = App\Models\RelevesNote::where('matiere_id',$mat->matiere_id)->where('annee_id','<>',$annee->id)->where('etudiant_id',$mat->etudiant_id)->get();
             if($releves->count()>0){
                // dd($mat->matiere_id);
