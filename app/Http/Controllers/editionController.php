@@ -558,15 +558,7 @@ foreach ($anonyms as $anony){
 								else{
 
 													$matiere1=Matiere::find($maitief->matiere_id);
-													$etd_mat = new EtudMat();
-													$etd_mat->etudiant_id = $id;
-													$etd_mat->profil_id = $profil;
-													$etd_mat->NODOS = $etudiant->NODOS;
-													$etd_mat->Code = $matiere1->modulle_id;
-													$etd_mat->NOMAT = $matiere1->code;
-													$etd_mat->matiere_id = $matiere1->id;
-													$etd_mat->ref_semestre_id = $matiere1->ref_semestre_id;
-													$etd_mat->annee_id = $this->annee_id();
+												
 												//	$etd_mat->save();
 								}
 						}
@@ -756,7 +748,7 @@ foreach ($anonyms as $anony){
                     $etd_mat->matiere_id = $matiere->id;
                     $etd_mat->ref_semestre_id = $matiere->ref_semestre_id;
                     $etd_mat->annee_id = $this->annee_id();
-                    $etd_mat->save();
+                   // $etd_mat->save();
                 }
             }
 
