@@ -712,7 +712,7 @@ foreach ($anonyms as $anony){
         $exm = new ExamenCONController();
         $titre=trans("text_me.attestation");
         $html = $exm->entete($titre.'<br>'.$annee->libelle.'','P',false,$etudiant);
-        $html .=$this->infosEtudiant($etudiant);
+       // $html .=$this->infosEtudiant($etudiant);
         $html .=$this->infosInscription($etudiantMat,$etudiant->groupe);
 		 return view('getbiltinsFondamental',['html'=>$html]);
 
@@ -857,7 +857,7 @@ foreach ($anonyms as $anony){
                         $profil1 = EtudMat::where('etudiant_id',$etudiant->id)->where('annee_id',$annee->id)->orderBy('ref_semestre_id','DESC')->get()->first()->profil_id;
                     }
                      $profil=Profil::find($profil1);
-        dd( $profil);
+       
                     //- '.$profil->departement->libelle.'
                     $html .='<tr>
                         <td align="right" style="width: 70%">'.$profil->ref_niveau_etude->libelle.' - '.$profil->libelle.'</td>
