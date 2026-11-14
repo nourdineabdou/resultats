@@ -619,19 +619,7 @@ foreach ($anonyms as $anony){
             $verif1m =EtudMat::where('annee_id',3)->where('etudiant_id',$etdsmm->etudiant_id)->where('matiere_id',1555)->get();
             if ($verif1m->count()>0 ){
             }
-            else{
-                $matiere=Matiere::find(1555);
-                $etd_mat = new EtudMat();
-                $etd_mat->etudiant_id = $etdsmm->etudiant_id;
-                $etd_mat->profil_id = 74;
-                $etd_mat->NODOS = $etdsmm->NODOS;
-                $etd_mat->Code = $matiere->modulle_id;
-                $etd_mat->NOMAT = $matiere->code;
-                $etd_mat->matiere_id = $matiere->id;
-                $etd_mat->ref_semestre_id = $matiere->ref_semestre_id;
-                $etd_mat->annee_id = 3;
-                $etd_mat->save();
-            }
+            
             /*$verif2m =EtudMat::where('annee_id',3)->where('etudiant_id',$etdsmm->etudiant_id)->where('matiere_id',1554)->get();
             if ($verif2m->count()>0 ){
             }
@@ -646,7 +634,7 @@ foreach ($anonyms as $anony){
                 $etd_mat->matiere_id = $matiere->id;
                 $etd_mat->ref_semestre_id = $matiere->ref_semestre_id;
                 $etd_mat->annee_id = 3;
-                $etd_mat->save();
+             //   $etd_mat->save();
             }
             }
         }*/
@@ -668,7 +656,7 @@ foreach ($anonyms as $anony){
                            {
                                $ms=EtudMat::find($MtM->id);
 							   if($ms)
-                               $ms->delete();
+                          //     $ms->delete();
                            }
                        }
                    }
@@ -687,7 +675,7 @@ foreach ($anonyms as $anony){
                     $etd_mat->matiere_id = $matiere->id;
                     $etd_mat->ref_semestre_id = $matiere->ref_semestre_id;
                     $etd_mat->annee_id = $this->annee_id();
-                    $etd_mat->save();
+                   // $etd_mat->save();
 					if ( $MtMat->count()>0){
                 $releves = App\Models\RelevesNote::where('matiere_id',$matiere->id)->where('annee_id','<>',$annee->id)->where('etudiant_id',$id)->get();
                 if($releves->count()>0){
