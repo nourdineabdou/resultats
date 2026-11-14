@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Annee;
 
+
 use App\Models\Matiere;
 use Illuminate\Http\Request;
 use App\Http\Requests\FamilleRequest;
@@ -685,7 +686,7 @@ foreach ($anonyms as $anony){
                            foreach ($MtMat as $MtM)
                            {
                                $ms=EtudMat::find($MtM->id);
-                               $ms->delete();
+                            //   $ms->delete();
                            }
                        }
                    }
