@@ -712,7 +712,7 @@ foreach ($anonyms as $anony){
         $exm = new ExamenCONController();
         $titre=trans("text_me.attestation");
         $html = $exm->entete($titre.'<br>'.$annee->libelle.'','P',false,$etudiant);
-       // $html .=$this->infosEtudiant($etudiant);
+        $html .=$this->infosEtudiant($etudiant);
         $html .=$this->infosInscription($etudiantMat,$etudiant->groupe);
 		 return view('getbiltinsFondamental',['html'=>$html]);
 
