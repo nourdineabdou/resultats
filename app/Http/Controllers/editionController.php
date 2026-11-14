@@ -852,7 +852,7 @@ foreach ($anonyms as $anony){
        
                     //- '.$profil->departement->libelle.'
                     $html .='<tr>
-                        <td align="right" style="width: 70%">'.$profil->ref_niveau_etude->libelle.' - '.$profil->libelle.'</td>
+                        <td align="right" style="width: 70%">'.$profil->ref_niveau_etude->libelle.' | '.$profil->libelle.'</td>
                         <td align="right" style="width: 30%">:'.trans("text_me.profil").'</td>
                     </tr>
                 </table>
