@@ -566,7 +566,7 @@ foreach ($anonyms as $anony){
 													$etd_mat->matiere_id = $matiere1->id;
 													$etd_mat->ref_semestre_id = $matiere1->ref_semestre_id;
 													$etd_mat->annee_id = $this->annee_id();
-													$etd_mat->save();
+												//	$etd_mat->save();
 								}
 						}
 						}
