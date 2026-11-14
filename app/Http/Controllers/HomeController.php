@@ -89,7 +89,7 @@ class HomeController extends Controller
                 $verif=EtudMat::where('annee_id',$annee->id)->where('etudiant_id',$etudiant->id)->where('ref_semestre_id',$semestre->id)->get();
                 if ($verif->count()>0)
                 {
-                    $html .='<div class="col-md-12 text-center form-group " align="center"><button type="button" class="btn btn-outline-secondary mb-3 btn-block" onclick="getbultin('.$etudiant->id.','.$semestre->id.')"  class="btn btn-sm btn-danger"><i class="fa fa-file-pdf"> '.$semestre->libelle.' </i></button></div>';
+                 //   $html .='<div class="col-md-12 text-center form-group " align="center"><button type="button" class="btn btn-outline-secondary mb-3 btn-block" onclick="getbultin('.$etudiant->id.','.$semestre->id.')"  class="btn btn-sm btn-danger"><i class="fa fa-file-pdf"> '.$semestre->libelle.' </i></button></div>';
                 }
             }
 
