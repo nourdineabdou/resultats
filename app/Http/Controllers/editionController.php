@@ -822,7 +822,7 @@ $idverifexiste=0;$cptmt=0;
         foreach ($etudiantMat as $mat) {
             //dd($mat->matiere_id);
 			//$cptmt=0;
-			$idverifexiste=0;$groupe ='';
+			$idverifexiste=0;//$groupe ='';
             $releves = App\Models\RelevesNote::where('matiere_id',$mat->matiere_id)->where('annee_id','<>',$annee->id)->where('etudiant_id',$mat->etudiant_id)->get();
             if($releves->count()>0){
                // dd($mat->matiere_id);
@@ -844,7 +844,7 @@ $idverifexiste=0;$cptmt=0;
                 <td align="center">' . $mat->matiere->modulle->libelle . '</td>
                 <td align="center">' . $mat->matiere->credit . '</td>
                 <td align="right">' . $mat->matiere->libelle . '</td>
-                <td align="center"> </td>
+                <td align="center"> '.$groupe.'</td>
                 <td align="center">' . $mat->ref_semestre_id . '</td>
             </tr>';
         }
