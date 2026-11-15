@@ -633,71 +633,7 @@ foreach ($anonyms as $anony){
         }*/
 		//jusqau ici
         $niveauEtude=Profil::find($profil);
-        if ($niveauEtude->ref_niveau_etude_id == 1)
-        {
-            $credits=0;
-            $matieres = Matiere::where('profil_id', $profil)->whereIn('ref_semestre_id',[1,2])->get();
-            foreach ($matieres as $matiere) {
-               $MtMat  = EtudMat::where('etudiant_id',$id)->where('matiere_id',$matiere->id)->where('annee_id',$annee->id)->orderBy('ref_semestre_id')->get();
-            if ( $MtMat->count()>0){
-                $releves = App\Models\RelevesNote::where('matiere_id',$matiere->id)->where('annee_id','<>',$annee->id)->where('etudiant_id',$id)->get();
-                if($releves->count()>0){
-                   foreach ($releves as $releve)
-                   {
-                       if ($releve->decision == 1 or $releve->decision == 11) {
-                           foreach ($MtMat as $MtM)
-                           {
-                               $ms=EtudMat::find($MtM->id);
-							   if($ms)
-                          //     $ms->delete();
-                           }
-                       }
-                   }
-                }
-            }
-            else{
-
-                if ($etudiant->NODOS > '32591') {
-
-                    $etd_mat = new EtudMat();
-                    $etd_mat->etudiant_id = $id;
-                    $etd_mat->profil_id = $profil;
-                    $etd_mat->NODOS = $etudiant->NODOS;
-                    $etd_mat->Code = $matiere->modulle_id;
-                    $etd_mat->NOMAT = $matiere->code;
-                    $etd_mat->matiere_id = $matiere->id;
-                    $etd_mat->ref_semestre_id = $matiere->ref_semestre_id;
-                    $etd_mat->annee_id = $this->annee_id();
-                   // $etd_mat->save();
-					if ( $MtMat->count()>0){
-                $releves = App\Models\RelevesNote::where('matiere_id',$matiere->id)->where('annee_id','<>',$annee->id)->where('etudiant_id',$id)->get();
-                if($releves->count()>0){
-                   foreach ($releves as $releve)
-                   {
-                       if ($releve->decision == 1 or $releve->decision == 11) {
-                           foreach ($MtMat as $MtM)
-                           {
-                               $ms=EtudMat::find($MtM->id);
-                            //   $ms->delete();
-                           }
-                       }
-                   }
-                }
-            }
-                }
-            }
-
-            }
-            /*foreach ($etudiantMat as $etudMat)
-            {
-               $matiere= App\Models\Matiere::find($etudMat->matiere_id);
-               $credits +=$matiere->credit;
-            }
-            if ($credits<57)
-            {
-
-            }*/
-        }
+        
 
         $etudiantMat = EtudMat::where('etudiant_id',$id)->where('annee_id',$annee->id)->orderBy('ref_semestre_id')->get();
 
